@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark" data-language="en">
 <head>
   <meta charset="utf-8">
   <!-- Google Tag Manager -->
@@ -10,12 +10,22 @@
     gtag('js', new Date());
   </script>
   <!-- End Google Tag Manager -->
+  <script>
+    // Apply saved preferences before styles load to avoid a light flash.
+    try {
+      const saved = JSON.parse(localStorage.getItem('fieldwork.preferences.v1')) || {};
+      document.documentElement.dataset.theme = saved.theme === 'light' ? 'light' : 'dark';
+      document.documentElement.dataset.language = saved.language === 'hinglish' ? 'hinglish' : 'en';
+      document.documentElement.lang = saved.language === 'hinglish' ? 'hi-Latn' : 'en';
+    } catch { /* Dark mode and English remain available without storage. */ }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#002FA7">
   <meta name="description" content="Prepare for your next role with a practical job preparation playbook, study resources, and an application tracker that saves your notes in this browser.">
   <title>Fieldwork — Career preparation</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <script src="localization.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -56,9 +66,17 @@
   <div class="site-content">
     <header class="topbar">
       <button class="icon-button mobile-menu" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><svg class="icon"><use href="#i-menu"/></svg></button>
-      <div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumb">Overview</strong></div>
+      <div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumb" data-guide-content>Overview</strong></div>
       <form id="global-search" class="search-box" role="search"><button class="icon-button search-trigger" type="button" aria-label="Search the guide"><svg class="icon"><use href="#i-search"/></svg></button><input name="q" aria-label="Search the guide" placeholder="Search the guide" autocomplete="off"><kbd>/</kbd></form>
       <a class="header-guide" href="#booklet">Read the guide<svg class="icon" aria-hidden="true"><use href="#i-up"/></svg></a>
+      <div class="preferences" aria-label="Display preferences">
+        <div class="language-control" role="group" aria-label="Reading language">
+          <span id="language-en">English</span>
+          <button id="language-toggle" class="preference-switch" type="button" role="switch" aria-checked="false" aria-label="Read in Hinglish" aria-describedby="language-en language-hinglish"><span class="switch-knob"></span></button>
+          <span id="language-hinglish">Hinglish</span>
+        </div>
+        <button id="theme-toggle" class="theme-control" type="button" role="switch" aria-checked="true" aria-label="Dark mode"><svg class="icon" aria-hidden="true"><use href="#i-sun"/></svg><span id="theme-label">Dark</span><span class="preference-switch" aria-hidden="true"><span class="switch-knob"></span></span></button>
+      </div>
     </header>
     <main id="main" tabindex="-1"><div class="loading">Loading workspace…</div></main>
     <footer class="site-footer"><a href="#overview">fieldwork.</a><nav aria-label="Footer navigation"><a href="#booklet">Playbook</a><a href="#applications">Applications</a><a href="#planner">Study plan</a></nav></footer>

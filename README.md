@@ -22,13 +22,14 @@ The hosted site has its own browser storage, separate from a localhost preview. 
 
 ## Static hosting
 
-To host the site, copy `index.html`, `styles.css`, `app.js`, `assets/`, and `resources/` to a static host. Keep the relative paths. Navigation uses URL hashes, so you do not need a rewrite rule. Fonts come from the device; the site makes no external font requests.
+To host the site, copy `index.html`, `styles.css`, `localization.js`, `app.js`, `assets/`, and `resources/` to a static host. Keep the relative paths. Navigation uses URL hashes, so you do not need a rewrite rule. Fonts come from the device; the site makes no external font requests.
 
 Opening `index.html` directly through `file://` prevents the browser from loading the JSON files. Use the preview server or a static host.
 
 ## What is included
 
-- One guide with eleven chapters and a downloadable PDF.
+- One guide with eleven chapters in English and Roman Hinglish, plus the original downloadable PDF.
+- Header switches for reading language and dark/light mode. Dark mode is the default; English is the initial reading language.
 - Checkboxes for each chapter's tasks, saved when you click them.
 - Templates in the chapters about resumes, projects, and contacting recruiters.
 - A direct Hinglish action chapter for freshers, with copyable introduction templates and a phone clipboard checklist.
@@ -44,6 +45,8 @@ The browser saves state under `fieldwork.v1` in `localStorage`. This includes da
 
 Data stays with the browser and origin you used. A different port, another browser, or clearing site data gives you a separate or empty workspace. Export application records if you want a backup. There is no sign-in or server sync.
 
+Display preferences are stored separately under `fieldwork.preferences.v1`. Changing language keeps the same chapter and checklist keys; it does not reset progress. The theme is applied before the stylesheet loads so returning light-mode readers do not see a dark flash. Preferences still work for the current session if storage is unavailable.
+
 The app does not submit applications or send recruiter messages. Those actions happen on the relevant job site or in your own email app.
 
 ## Analytics
@@ -58,7 +61,7 @@ Put the file in `resources/files/` and add an entry to `resources/manifest.json`
 
 ## Edit the guide
 
-Both the reader and PDF use `resources/booklet.json`. Edit the prose there. Chapter IDs identify saved reading progress. Checklist checks use the chapter ID and item index, so keep checklist order stable when you want existing checks to keep the same meaning.
+The original guide and PDF use `resources/booklet.json`. The reader overlays `resources/languages.json` for English and Hinglish. Update translations when editing prose. Keep translation section and checklist order aligned with the original. `localization.js` contains interface labels; user-entered text is never translated. Application-message templates stay in professional English in both reading languages. Downloaded files keep their original language and formatting. Chapter IDs identify saved reading progress. Checklist checks use the chapter ID and item index, so keep checklist order stable when you want existing checks to keep the same meaning.
 
 To rebuild the PDF, use Python with ReportLab:
 

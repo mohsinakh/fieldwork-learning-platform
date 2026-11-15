@@ -1,0 +1,400 @@
+{
+  "en": {
+    "chapters": {
+      "fresher-actions": {
+        "title": "No experience yet? Start here.",
+        "label": "A practical action plan",
+        "intro": "Work through these steps in order if you do not have experience yet. Keep applying to relevant jobs while you prepare your resume. Check off each task when it is done.",
+        "sections": [
+          {
+            "title": "1. Find a genuine internship or other real work.",
+            "text": "Check company careers pages and job portals for internships. Look at the team, mentor, actual tasks, and duration. Only list a three-month internship if you really completed three months. Until you find one, describe self-projects, volunteer work, or open-source contributions using their correct names. Do not invent an internship, certificate, or experience at another company."
+          },
+          {
+            "title": "2. Build two or three projects and understand them.",
+            "text": "Build projects that use the role and stack you want to work in. Use AI for help, but run the code and change it yourself. Publish setup steps, a demo, and a README on GitHub, then add the working link to your resume. Make a study list covering architecture, main concepts, tests, and common interview questions. Only list a project as completed work once you have built and understood it."
+          },
+          {
+            "title": "3. Ask for help choosing a stack.",
+            "text": "Read a few relevant job descriptions. Then ask a mentor or study group: this is my current level; which stack and project would suit these roles? Asking in the group lets other learners read the answer too. Make time each day to study and understand your projects. Learn the basics before an interview arrives."
+          },
+          {
+            "title": "4. Complete your Naukri profile.",
+            "text": "Fill in your skills, projects, education, availability, and job preferences accurately. Keep dates and work details consistent across LinkedIn, GitHub, and your resume. Review relevant openings daily. Changing a word or two in About is not a hiring trick; update your profile when you have a new skill, project, or detail to add. [S3]"
+          },
+          {
+            "title": "5. Use spare time to apply for relevant jobs.",
+            "text": "Check saved jobs before opening reels on your phone. Read the description, check the fit with your skills, and send the right resume. Use recent-posting filters to find new openings, without assuming they guarantee replies or fewer applicants. If the listing publishes a recruiting email or phone number, save it with the job link and follow the contact instructions before emailing or calling. Record applications and follow-up dates in your tracker. [S2]"
+          },
+          {
+            "title": "6. Keep your links and introduction ready on your phone.",
+            "text": "Write your LinkedIn link, GitHub link, and a short professional introduction once, carefully. Pin them separately if your keyboard clipboard supports it. In Gboard, touch and hold copied text to pin it. If pinning is unavailable, use Notes or text replacement. Check that you have pasted into the correct field on each application. This saves repeated typing; you still need to read the description and choose your resume. [S5]"
+          }
+        ],
+        "copyNote": "Choose the template for your experience level. Replace every bracket with your own details. Only include employers, skills, grades, and awards that are yours. Save the finished version and your links on your phone.",
+        "copyBlocks": [
+          {
+            "id": "fresher-intro",
+            "label": "Fresher intro template",
+            "text": "[Your degree or current course] graduate/student applying for [target role]. Built [project] using [tools] to solve [problem]; responsible for [what you implemented]. Comfortable with [skills you can demonstrate]. Education: [degree]; [CGPA or verified award, if relevant]. LinkedIn: [your LinkedIn URL]. GitHub: [your GitHub URL]."
+          },
+          {
+            "id": "experienced-intro",
+            "label": "Experienced intro template",
+            "text": "[Your specialisation] engineer, currently [actual role] at [actual employer], working on [systems or product]. My contribution includes [specific work], using [tools you use]. Earlier work at [previous employer or project] covered [relevant responsibilities]. Education: [degree]; [CGPA and verified award, if relevant]. LinkedIn: [your LinkedIn URL]. GitHub: [your GitHub URL]."
+          },
+          {
+            "id": "profile-links",
+            "label": "Links to save separately",
+            "text": "LinkedIn: [your LinkedIn URL]\nGitHub: [your GitHub URL]"
+          }
+        ],
+        "checklist": [
+          "Shortlisted genuine internships or planned self-directed work",
+          "Chosen two or three projects that fit the role",
+          "Run and understood the projects and checked their GitHub links",
+          "Made a study list for architecture and interview topics",
+          "Completed Naukri profile and job preferences",
+          "Saved LinkedIn and GitHub links on my phone",
+          "Saved a short introduction with my own details",
+          "Recorded relevant applications and follow-up dates in the tracker"
+        ]
+      }
+    }
+  },
+  "hinglish": {
+    "title": "Job ki taiyari ka playbook",
+    "chapters": {
+      "direction": {
+        "title": "Kin roles ke liye apply karna hai?",
+        "label": "Role choose karo",
+        "intro": "Pehle decide karo ki kis tarah ka kaam karna hai. Isse padhai choose karna aur resume mein relevant experience dikhana aasaan hoga.",
+        "sections": [
+          {
+            "title": "Kuch job descriptions padho",
+            "text": "Apni pasand ki paanch se das openings dhoondo. Responsibilities aur baar-baar aane wali skills compare karo. Experience level, location aur working arrangement bhi dekho. Ek main role aur usse milta-julta alternative choose karo. Job preferences mein wahi titles likho jinka kaam tum kar sakte ho."
+          },
+          {
+            "title": "Dekho abhi kya dikha sakte ho",
+            "text": "Har common requirement ke saamne koi project, work task ya course exercise likho jiske baare mein baat kar sakte ho. Jo sirf video mein dekha hai, use study list mein rakho. Tab tak practice karo jab tak use karna aur samjhana aa jaye."
+          },
+          {
+            "title": "Utni applications ka target rakho jitni kar sakte ho",
+            "text": "Shuruaat mein weekday par teen relevant applications try kar sakte ho. Padhai aur doosri zimmedariyon ke hisaab se target badlo. Achhi match wali opening ka description padhne aur application tayyar karne ke liye waqt do. Har hafte responses dekho."
+          }
+        ],
+        "checklist": [
+          "Ek main role aur related alternative choose karo",
+          "Paanch job descriptions padho",
+          "Common requirements ko us kaam se match karo jo samjha sakte ho"
+        ],
+        "example": {
+          "label": "Apna target likho",
+          "text": "Mujhe [role] chahiye. Mera sabse relevant kaam [project ya experience] hai, jahan maine [apna contribution] kiya."
+        }
+      },
+      "story": {
+        "title": "Apne profiles par facts ek jaise rakho",
+        "label": "Resume aur profiles",
+        "intro": "Resume, LinkedIn, GitHub ya portfolio padhne wale ko tumhare kaam aur employers ke baare mein ek jaise facts milne chahiye.",
+        "sections": [
+          {
+            "title": "Har profile ki details check karo",
+            "text": "Dates, job titles, employment type, education aur project names compare karo. Ek platform par doosre se zyada detail ho sakti hai. Agar vendor ke through client assignment par kaam kiya hai, employer ka sahi naam do aur client ka kaam accurately samjhao."
+          },
+          {
+            "title": "Projects ko review karna aasaan banao",
+            "text": "Ek short headline likho jo bataye ki kis tarah ka kaam karna chahte ho. Do ya teen relevant projects feature karo. Har project mein problem, apna banaya hua hissa aur ek decision samjhao. Itna evidence do ki koi kaam inspect kar sake. Repository README mein run karne ka tareeka aur limitations likho."
+          },
+          {
+            "title": "Wahi numbers likho jo samjha sako",
+            "text": "Resume par result likhte waqt baseline aur measurement ka tareeka pata hona chahiye. Batao ki result local test, prototype ya production se aaya. Team abhi join ki hai to kya bana rahe ho aur ab tak kya finish kiya, woh likho. Results measure hone ke baad add karo. Employer ka confidential data public profile par mat daalo."
+          }
+        ],
+        "checklist": [
+          "Profiles par dates aur titles check karo",
+          "Target roles ke hisaab se projects feature karo",
+          "Har result ka measurement check karo"
+        ],
+        "example": {
+          "label": "Project description ka example",
+          "text": "Maine [problem] ke liye [feature] banaya. Meri responsibility [apna hissa] thi. Maine [approach] choose kiya kyunki [reason], aur [test ya evaluation] se check kiya. Abhi iski [limitation] hai."
+        }
+      },
+      "fresher": {
+        "title": "Pehli job ke liye resume likho",
+        "label": "Freshers ke liye",
+        "intro": "Formal job nahi ki hai to apne projects aur doosra actual kaam dikhao. Interviewer ko kuch aisa do jo dikha aur samjha sako.",
+        "sections": [
+          {
+            "title": "Sabse useful details pehle rakho",
+            "text": "Contact details, relevant skills, selected projects, education aur genuine experience ek useful starting order hai. Education sabse strong qualification hai to use upar rakho. Early-career resume pehle ek readable page mein try karo; content ko zaroorat ho tabhi aur space lo."
+          },
+          {
+            "title": "Project mein apna hissa samjhao",
+            "text": "Problem, apna implementation, tools aur testing explain karo. Team project mein saaf batao ki tumne kaunsa part kiya. Jahan useful ho repository ya demo link do. Signed-out browser mein link kholkar dekho ki doosre log access kar sakte hain."
+          },
+          {
+            "title": "Experience sahi tareeke se likho",
+            "text": "Academic projects, volunteering, freelance work, open-source contributions aur self-directed work include kar sakte ho. Har cheez ko uske sahi naam se label karo. Virtual job simulation employment se alag hai. Wahi internships aur certificates likho jo complete kiye hain. Gap bharne ke liye employer, certificate, dates ya results mat banao."
+          }
+        ],
+        "checklist": [
+          "Wahi projects choose karo jo chala aur samjha sakte ho",
+          "Team work mein apna contribution likho",
+          "Har listed experience aur credential check karo"
+        ],
+        "example": {
+          "label": "Project bullet ka example",
+          "text": "[Project] mein [tools] use karke [feature] implement kiya. [Tests ya evaluation] se [behaviour] check kiya. Apne actual kaam ki details bharo."
+        }
+      },
+      "experience": {
+        "title": "Apna work experience saaf likho",
+        "label": "Experienced applicants ke liye",
+        "intro": "Recruiter ko samajhna chahiye ki tumhari responsibility kya thi aur contribution kya tha. Sirf duties ki list se zyada detail do.",
+        "sections": [
+          {
+            "title": "Batao tumne kya kiya",
+            "text": "Bullet ki shuruaat apne action se karo. Apna owned part samjhao aur evidence ho to outcome do. Result poori team ka hai to apna contribution saaf rakho. Naye role se match hone wale recent work ko zyada space do."
+          },
+          {
+            "title": "Ongoing work ko specific rakho",
+            "text": "Abhi join kiya hai to kaunsa component bana rahe ho aur kis stage par hai, woh likho. Design review complete kiya, validation implement ki ya tests add kiye hain to woh mention kar sakte ho. Deployment aur business results tabhi likho jab ho chuke hon."
+          },
+          {
+            "title": "Kaam yaad ho tabhi record bana lo",
+            "text": "Private notes mein problem, decisions, teammates aur share karne layak results likho. Technical measurements ko business outcomes se alag rakho. Latency ya quality claim ke liye baseline, dataset, sample size aur hardware jaisi relevant details record karo. Employer ke confidentiality rules follow karo."
+          }
+        ],
+        "checklist": [
+          "Vague duty ko specific contribution se replace karo",
+          "Apne kaam aur team ke result ko alag samjhao",
+          "Ongoing work ko ongoing hi likho"
+        ],
+        "example": {
+          "label": "Ongoing-work bullet",
+          "text": "[Use case] ke liye [component] implement kar raha/rahi hoon. [Milestone] complete hai aur abhi [specific behaviour] check kar raha/rahi hoon."
+        }
+      },
+      "projects": {
+        "title": "Resume wale projects samjho",
+        "label": "Project preparation",
+        "intro": "Target role ki skills use karne wala project choose karo. Ek working version finish karo, phir use samjhana aur badalna seekho.",
+        "sections": [
+          {
+            "title": "Manageable project choose karo",
+            "text": "Decide karo ki project kiske liye hai, kya problem solve karta hai aur first version mein kya zaroori hai. Setup steps, short demo aur architecture aur known limits wali README do. Do finished projects jo samajhte ho, unhe discuss karna kai unfinished copies se aasaan hota hai."
+          },
+          {
+            "title": "AI se mile code ko check karo",
+            "text": "AI build karne, unfamiliar code samajhne, tests aur alternatives sochne mein madad kar sakta hai. Output review karo, dependencies aur licences check karo aur secrets repository mein mat daalo. Resume mein project likhne se pehle use khud chalao. Feature badalna, failure debug karna aur important design choices samjhana aana chahiye. Apna contribution aur mili hui assistance sahi batao."
+          },
+          {
+            "title": "Apply karne se pehle explain karne ki practice karo",
+            "text": "Problem aur input se output tak ka flow do minute mein samjhao. Apna part aur ek failure case batao. Approach kyun choose ki, tests kaise kiye aur aage kya badloge, in sawalon ke jawab tayyar karo. Apply karne se pehle main parts seekho, phir interview se pehle details revise karo."
+          }
+        ],
+        "checklist": [
+          "Clean setup se project chalao",
+          "Architecture aur limitations likho",
+          "Ek design choice aur failure case samjhane ki practice karo"
+        ]
+      },
+      "search": {
+        "title": "Apni skills se match hone wali jobs dhoondo",
+        "label": "Job search",
+        "intro": "Apply karne se pehle description padho. Un roles par time do jahan bata sakte ho ki tumhari skills ya experience kaam se kaise match karti hai.",
+        "sections": [
+          {
+            "title": "Focused search karo",
+            "text": "Role title ke saath apni ek skill search karo. Related titles bhi try karo, phir location, work arrangement aur experience filters lagao. Date-posted filters se recent openings check kar sakte ho; last 24 hours ka option ho to use bhi dekho. Nayi post check karna useful hai, lekin kam applicants ya reply ki guarantee nahi hai. [S2]"
+          },
+          {
+            "title": "Naukri aur LinkedIn profile poori karo",
+            "text": "Accurate skills, experience, availability, preferred titles aur locations bharo. Recommended jobs dekho aur relevant alerts ya saved searches banao. Koi detail badle tab profile update karo. Roz ek word badalna hiring ka reliable tareeka nahi hai; us waqt mein openings dekho aur suitable roles par apply karo. [S3]"
+          },
+          {
+            "title": "Company ki careers page check karo",
+            "text": "Jin companies mein kaam karna chahte ho unki short list rakho. Ho sake to official careers page par opening confirm karo aur uski instructions follow karo. Main responsibilities, mandatory requirements, work eligibility, location aur seniority dekho. Har preferred skill na ho tab bhi apply kar sakte ho, lekin job karne par asar daalne wale gaps sach batao. Listing hat jaye to kaam aaye, isliye URL, description, date aur source save karo."
+          }
+        ],
+        "checklist": [
+          "Role aur location preferences sahi set karo",
+          "Relevant search ka alert banao",
+          "Suitable openings aur unke descriptions save karo"
+        ]
+      },
+      "apply": {
+        "title": "Apply karne se pehle resume tailor karo",
+        "label": "Application ki taiyari",
+        "intro": "Is role se relevant experience aasaani se milna chahiye. Emphasis badalte waqt facts same rakho.",
+        "sections": [
+          {
+            "title": "Description ko apne kaam se match karo",
+            "text": "Poora description padho aur main responsibilities dikhane wale projects ya work examples choose karo. Relevant bullets upar lao. Employer ke terms tab use karo jab woh tumhari actual skills ko describe karte hon. Master resume rakho aur har role ko bheji hui version save karo. Role kyun fit hai aur kaunse examples support karte hain, yeh samjhane ke liye tayyar raho. [S1]"
+          },
+          {
+            "title": "Bhejne wali file check karo",
+            "text": "Readable text, standard headings aur simple layout use karo. Maanga gaya file format follow karo. Export ke baad spelling aur links check karo, aur dekho ki text select hota hai. Plain text editor mein copy karne se kuch problems dikh sakti hain, lekin isse har applicant tracking system mein sahi reading ki guarantee nahi milti."
+          },
+          {
+            "title": "Application ki details check karo",
+            "text": "Company aur title confirm karo, sahi resume attach karo aur screening questions ka sach jawab do. Cover letter maanga ho to ek ya do relevant examples se fit samjhao. Date, resume version aur follow-up reminder record karo. Same application do baar submit mat karo. [S1]"
+          }
+        ],
+        "checklist": [
+          "Main requirements ke liye evidence choose karo",
+          "Exported resume padho aur links test karo",
+          "Submit ki hui version save karo"
+        ],
+        "example": {
+          "label": "Resume edit karne ke liye AI prompt",
+          "text": "Is job description aur mere resume ko compare karo. Batao mere existing work mein kya emphasise karna chahiye. Skills, experience, metrics, employers ya credentials mat banao. Jo requirements maine demonstrate nahi ki hain, unhe point out karo."
+        }
+      },
+      "outreach": {
+        "title": "Recruiters se baat karo aur referrals maango",
+        "label": "Messages aur follow-ups",
+        "intro": "Batao kis role ke liye poochh rahe ho aur usmein interest kyun hai. Request itni short rakho ki saamne wala jaldi jawab de sake.",
+        "sections": [
+          {
+            "title": "Listing mein diye contact details use karo",
+            "text": "Role ke liye published recruiting email ya professional channel use karo. Title aur reference number ho to include karo. Contact instructions follow karo, personal numbers avoid karo aur baar-baar messages mat bhejo. Sirf application ke liye zaroori details share karo."
+          },
+          {
+            "title": "Referral request mein context do",
+            "text": "Opening aur relevant work ka ek example mention karo. Poochho ki kya woh tumhara fit review kar sakte hain ya referral process bata sakte hain. Unhe mana karne ki jagah do. Referral milne par bhi company ka application process follow karna hota hai."
+          },
+          {
+            "title": "Follow-up se pehle waqt do",
+            "text": "Employer ne timeline di hai to use follow karo. Warna polite check-in ke liye lagbhag saat se das business days ek reasonable starting point hai. Role aur apply karne ki date likho, phir next steps poochho. Doosri jagah apply karte raho aur no-contact instructions respect karo."
+          }
+        ],
+        "checklist": [
+          "Check karo ki contact channel applicants ke liye hai",
+          "Role aur ek relevant example mention karo",
+          "Employer ki timeline se follow-up date set karo"
+        ],
+        "example": {
+          "label": "Application follow-up",
+          "text": "Hello [name], I applied for [role / reference] on [date]. My work on [example] involved [your contribution], which fits [requirement]. Could you share any update on the next steps? Thank you for your time."
+        }
+      },
+      "routine": {
+        "title": "Apply karte hue padhai ka time rakho",
+        "label": "Padhai aur interview practice",
+        "intro": "Aisa study time choose karo jo nibha sako. Baithne se pehle kaam decide karo aur distracting apps door rakho.",
+        "sections": [
+          {
+            "title": "Har session ka clear task rakho",
+            "text": "Do ghante hon to 45 minute concept seekho, 45 minute use karo, 20 minute bina notes samjhao aur 10 minute agla task choose karo. Zaroorat par breaks lo. Do ghante fit nahi hote to chhota session shuru karo aur dheere-dheere badhao."
+          },
+          {
+            "title": "Check karo kya samajh aaya",
+            "text": "Lesson ke baad use band karke idea apne words mein samjhao. Exercise try karo ya example badlo. Jo samjha nahi sake use note karo aur specific sawaal poochho. Course poora dekh lena yeh nahi batata ki interview mein material use kar paoge."
+          },
+          {
+            "title": "Apne interview ke hisaab se taiyari karo",
+            "text": "Job description, bheja hua resume aur company ke product ke baare mein phir padho. Role se relevant fundamentals aur practical tasks practice karo. Project walkthrough, doosron ke saath kaam ke examples aur team ke liye questions tayyar karo. Interview setup check karo aur zaroorat ho to accessibility adjustments maango."
+          }
+        ],
+        "checklist": [
+          "Aisa study time choose karo jo nibha sako",
+          "Bina notes padhe concept samjhao",
+          "Interview se pehle project walkthrough practice karo"
+        ]
+      },
+      "review": {
+        "title": "Har hafte job search review karo",
+        "label": "Agle do hafte",
+        "intro": "Applications aur interviews ka record rakho taaki samajh aaye kahan badlav karna hai. Sirf ek hafte reply na aana apne aap mein bahut kam evidence hai.",
+        "sections": [
+          {
+            "title": "Pehla hafta taiyari mein lagao",
+            "text": "Target roles choose karo, profiles check karo aur resume tayyar karo. Ek project ki case study finish karo, job alerts aur application tracker set karo. Kisi bharosemand insaan se ek application ko uski job description ke saamne review karwao."
+          },
+          {
+            "title": "Apply karo aur responses dekho",
+            "text": "Doosre hafte jitne relevant roles manage kar sakte ho utne apply karo aur padhai jaari rakho. Dekho kin applications par reply aaya aur interview kitna aage badha. Chhote sample se pakka conclusion mat nikalo. Replies kam hi rahein to targeting aur resume ke examples check karo. Interviews atkein to mushkil lagi skills ya explanations par kaam karo."
+          },
+          {
+            "title": "Anjaan recruiters aur offers check karo",
+            "text": "Recruiter aur opening ko company ke official channels se verify karo. Job paane ya claimed earnings release karwane ke liye paise mat do. Bank details, identity documents ya deposits ki unexpected requests par dhyan do. Professional dikhne wali website offer ke genuine hone ka proof nahi hai. [S4]"
+          }
+        ],
+        "checklist": [
+          "Recorded applications aur responses review karo",
+          "Specific application ya interview par feedback lo",
+          "Agle hafte badalne ke liye ek cheez choose karo"
+        ]
+      },
+      "fresher-actions": {
+        "title": "Fresher ho? Yeh kaam karo.",
+        "label": "Seedha action plan",
+        "intro": "Experience nahi hai to isi order mein kaam karo. Resume tayyar karne ke saath relevant jobs par apply bhi karte raho. Neeche har kaam ko poora karke check lagao.",
+        "sections": [
+          {
+            "title": "1. Internship nahi hai? Asli kaam dhoondo.",
+            "text": "Company ki careers page aur job portals par internship openings dekho. Team, mentor, actual tasks aur duration check karo. Teen mahine ka internship sach mein kiya hai tabhi teen mahine likho. Abhi nahi mila to self-projects, volunteer work ya open-source contribution ko unke sahi naam se dikhao. Fake internship, banaya hua certificate, ya kisi aur company ke naam par experience mat likho."
+          },
+          {
+            "title": "2. Do ya teen projects banao aur samjho.",
+            "text": "Jis role aur stack par job chahiye, usi ke projects banao. AI se madad lo, lekin code chalao aur khud badal kar dekho. GitHub par setup steps, demo aur README daalo; phir working link resume mein lagao. Architecture, main topics, tests aur common interview questions ki study list banao. Project banne aur samajh aane ke baad hi use resume par completed work likho."
+          },
+          {
+            "title": "3. Stack clear nahi hai to sawaal poochho.",
+            "text": "Kuch relevant job descriptions dekho. Phir mentor ya apne study group mein poochho: mera current level yeh hai, in roles ke liye kaunsa stack aur project theek rahega? Group mein poochhne se doosre learners bhi jawab dekh sakte hain. Roz padhne aur project samajhne ka time rakho. Interview aane tak basic understanding ko mat taalo."
+          },
+          {
+            "title": "4. Naukri profile poori karo.",
+            "text": "Naukri par skills, projects, education, availability aur job preferences sahi bharo. LinkedIn, GitHub aur resume par dates aur work details ek jaise rakho. Roz relevant openings check karo. Sirf About mein ek-do words badalne ko hiring trick mat samjho; jab koi naya skill, project ya detail ho, tab update karo. [S3]"
+          },
+          {
+            "title": "5. Free time mein relevant jobs par apply karo.",
+            "text": "Phone par reels kholne se pehle saved jobs dekho. Description padho, apni skills se fit check karo aur sahi resume bhejo. Recent-posting filter se nayi openings dekho, lekin isse reply ya kam applicants ki guarantee nahi milti. Listing mein recruiting email ya phone diya ho to job link ke saath save karo; contact instructions follow karke hi email ya call karo. Application aur follow-up date tracker mein likho. [S2]"
+          },
+          {
+            "title": "6. Links aur intro phone mein ready rakho.",
+            "text": "Apna LinkedIn link, GitHub link aur short professional intro ek baar sahi likh lo. Keyboard clipboard mein Pin ka option ho to inhe alag-alag pin karo. Gboard mein copied text ko touch-and-hold karke Pin kiya ja sakta hai. Pin ka option na ho to Notes ya text replacement mein save karo. Har application mein sahi field mein paste karke ek baar check karo. Yeh repeated typing bachata hai; description padhna aur resume choose karna phir bhi zaroori hai. [S5]"
+          }
+        ],
+        "copyNote": "Neeche se apne level ka template lo. Har bracket apni details se bharo. Employer, skills, CGPA aur awards wahi likho jo tumhare hain. Final version aur apne links phone mein save kar lo.",
+        "copyBlocks": [
+          {
+            "id": "fresher-intro",
+            "label": "Fresher ka intro template",
+            "text": "[Your degree or current course] graduate/student applying for [target role]. Built [project] using [tools] to solve [problem]; responsible for [what you implemented]. Comfortable with [skills you can demonstrate]. Education: [degree]; [CGPA or verified award, if relevant]. LinkedIn: [your LinkedIn URL]. GitHub: [your GitHub URL]."
+          },
+          {
+            "id": "experienced-intro",
+            "label": "Experienced applicant ka intro template",
+            "text": "[Your specialisation] engineer, currently [actual role] at [actual employer], working on [systems or product]. My contribution includes [specific work], using [tools you use]. Earlier work at [previous employer or project] covered [relevant responsibilities]. Education: [degree]; [CGPA and verified award, if relevant]. LinkedIn: [your LinkedIn URL]. GitHub: [your GitHub URL]."
+          },
+          {
+            "id": "profile-links",
+            "label": "Alag save karne wale links",
+            "text": "LinkedIn: [your LinkedIn URL]\nGitHub: [your GitHub URL]"
+          }
+        ],
+        "checklist": [
+          "Asli internship openings shortlist ki, ya self-directed work ka plan banaya",
+          "Role ke hisaab se do ya teen projects choose kiye",
+          "Projects chala kar samjhe aur GitHub links check kiye",
+          "Architecture aur interview topics ki study list banayi",
+          "Naukri profile aur job preferences poori ki",
+          "LinkedIn aur GitHub links phone mein save kiye",
+          "Apni details wala short intro save kiya",
+          "Relevant applications aur follow-up dates tracker mein likhi"
+        ]
+      }
+    },
+    "sourceNotes": [
+      "Resume aur cover letter likhne ki advice. Chapters 3, 4 aur 7 dekho.",
+      "Date, location aur experience se jobs filter karne ka tareeka. Chapter 6 dekho. Available filters badal sakte hain.",
+      "Profile set karna aur jobs dhoondhna. Chapter 6 dekho.",
+      "Job offers aur paise maangne wali requests check karna. Chapter 10 dekho.",
+      "Gboard mein copied text save aur pin karna. Fresher action chapter dekho. Doosre keyboards alag ho sakte hain."
+    ]
+  }
+}

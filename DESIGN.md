@@ -12,15 +12,15 @@ Large chapter numbers connect the overview and reader. Counts come from the guid
 
 | Role | Value |
 | --- | --- |
-| Main surface | `#FFFFFF` |
-| Secondary surface | `#F7F7F8` |
-| Accent | `#002FA7` |
-| Main text | `#171719` |
-| Secondary text | `#68686F` |
-| Rules | `#DFDFE3`, 1 px |
+| Main surface | Dark `#101114`; light `#FFFFFF` |
+| Secondary surface | Dark `#191B20`; light `#F7F7F8` |
+| Accent | Dark text `#91ADFF`; light text and cover `#002FA7` |
+| Main text | Dark `#F1F2F6`; light `#171719` |
+| Secondary text | Dark `#A7ACB9`; light `#68686F` |
+| Rules | Dark `#343842`; light `#DFDFE3`, 1 px |
 | Typography | Helvetica Neue, with Helvetica and generic sans-serif fallbacks |
 
-The PDF uses Helvetica and the same colors. Counts show saved user activity; empty records stay empty.
+Dark is the default website theme. A header switch restores the light palette. The blue cover stays the same in both themes. Language and theme switches remain visible in a second header row on small screens. The PDF uses Helvetica and the light palette. Counts show saved user activity; empty records stay empty.
 
 ## Storage
 

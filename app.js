@@ -5,6 +5,44 @@ const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&a
 const icon = (name, extra = '') => `<svg class="icon ${extra}" aria-hidden="true"><use href="#i-${name}"/></svg>`;
 const uid = () => crypto.randomUUID();
 const storageKey = 'fieldwork.v1';
+const preferences = { theme: document.documentElement.dataset.theme || 'dark', language: document.documentElement.dataset.language || 'en' };
+function savePreferences() {
+  try { localStorage.setItem('fieldwork.preferences.v1', JSON.stringify(preferences)); }
+  catch { notify('Browser storage is unavailable. Changes will last for this session.'); }
+}
+function syncPreferences() {
+  document.documentElement.dataset.theme = preferences.theme;
+  document.documentElement.dataset.language = preferences.language;
+  document.documentElement.lang = preferences.language === 'hinglish' ? 'hi-Latn' : 'en';
+  $('#language-toggle').setAttribute('aria-checked', String(preferences.language === 'hinglish'));
+  $('#language-toggle').setAttribute('aria-label', ui('Read in Hinglish'));
+  $('#theme-toggle').setAttribute('aria-checked', String(preferences.theme === 'dark'));
+  $('#theme-toggle').setAttribute('aria-label', ui('Dark mode'));
+  $('#theme-label').textContent = ui(preferences.theme === 'dark' ? 'Dark' : 'Light');
+  document.querySelector('meta[name="theme-color"]').content = preferences.theme === 'dark' ? '#101114' : '#ffffff';
+}
+function selectBookLanguage() {
+  const translation = languages[preferences.language] || {};
+  book = { ...originalBook, title: translation.title || originalBook.title,
+    chapters: originalBook.chapters.map(chapter => ({ ...chapter, ...translation.chapters?.[chapter.id] })),
+    sources: originalBook.sources.map((source, i) => ({ ...source, note: translation.sourceNotes?.[i] || source.note })) };
+}
+$('#theme-toggle').addEventListener('click', () => {
+  preferences.theme = preferences.theme === 'dark' ? 'light' : 'dark';
+  syncPreferences(); savePreferences();
+});
+$('#language-toggle').addEventListener('click', () => {
+  preferences.language = preferences.language === 'en' ? 'hinglish' : 'en';
+  syncPreferences(); savePreferences();
+  if (originalBook) {
+    const draft = $('#add-task input')?.value;
+    selectBookLanguage(); render();
+    if (draft !== undefined && $('#add-task input')) $('#add-task input').value = draft;
+  }
+  localizeUI(document.body);
+});
+syncPreferences();
+localizeUI(document.body);
 const routes = { overview: 'Overview', booklet: 'Job-ready playbook', planner: 'My study plan', applications: 'Application tracker' };
 const defaultTasks = [
   { id: 'learn', title: 'Study a concept', detail: 'Read the explanation, then try an exercise.', duration: '45 min' },
@@ -22,7 +60,7 @@ try {
     if (stored.days && typeof stored.days === 'object' && !Array.isArray(stored.days)) state.days = stored.days;
   }
 } catch { /* The platform also works for the current session without browser storage. */ }
-let book, resources = [], toastTimeout;
+let book, originalBook, languages = {}, resources = [], toastTimeout;
 let selectedDate = todayKey();
 let timer = { end: Number.isFinite(state.focusTimer?.end) ? state.focusTimer.end : null, remaining: Number.isFinite(state.focusTimer?.remaining) ? Math.max(0, Math.min(1500, state.focusTimer.remaining)) : 1500, interval: null };
 
@@ -37,7 +75,7 @@ function dateText(value) {
 }
 function route() { const path=location.hash.slice(1).split('/')[0];return path==='resources'?'booklet':Object.hasOwn(routes,path)?path:'overview'; }
 function notify(message) {
-  const el = $('#toast'); el.textContent = message; el.classList.add('visible');
+  const el = $('#toast'); el.textContent = ui(message); el.classList.add('visible');
   clearTimeout(toastTimeout); toastTimeout = setTimeout(() => el.classList.remove('visible'), 3500);
 }
 function persist() {
@@ -60,7 +98,7 @@ function bookArt() {
 function taskList(date = selectedDate, limit = Infinity) {
   return tasksFor(date).slice(0, limit).map(t => {
     const done = doneFor(date).includes(t.id);
-    return `<div class="task-item ${done ? 'done' : ''}"><input type="checkbox" id="task-${esc(t.id)}" data-task="${esc(t.id)}" data-date="${date}" ${done ? 'checked' : ''}><label class="task-info" for="task-${esc(t.id)}">${esc(t.title)}${t.detail ? `<small>${esc(t.detail)}</small>` : ''}</label><span class="task-duration">${esc(t.duration || '')}</span>${t.date ? `<button class="icon-button danger" data-delete-task="${esc(t.id)}" aria-label="Delete task: ${esc(t.title)}">${icon('trash')}</button>` : ''}</div>`;
+    return `<div class="task-item ${done ? 'done' : ''}"><input type="checkbox" id="task-${esc(t.id)}" data-task="${esc(t.id)}" data-date="${date}" ${done ? 'checked' : ''}><label class="task-info" ${t.date ? 'data-user-content' : ''} for="task-${esc(t.id)}">${esc(t.title)}${t.detail ? `<small>${esc(t.detail)}</small>` : ''}</label><span class="task-duration">${esc(t.duration || '')}</span>${t.date ? `<button class="icon-button danger" data-delete-task="${esc(t.id)}" data-user-content aria-label="${esc(ui('Delete task: ') + t.title)}">${icon('trash')}</button>` : ''}</div>`;
   }).join('');
 }
 
@@ -78,13 +116,13 @@ function reader() {
   const checked = c.checklist.filter((_,i)=>state.chapterChecks.includes(`${c.id}:${i}`)).length;
   return `${heading('Job preparation guide', book.title + '.', 'Read a chapter, use its checklist, and come back when you need it.', `<div class="button-row"><a class="btn secondary" href="resources/files/job-ready-playbook.pdf" download>${icon('download')} Download PDF</a></div>`)}
     <div class="reader-layout"><label class="mobile-chapter-picker">Choose a chapter<select id="chapter-picker" aria-label="Choose chapter">${book.chapters.map((ch,i)=>`<option value="${i}" ${i===state.reading?'selected':''}>${String(i+1).padStart(2,'0')}. ${esc(ch.title)}</option>`).join('')}</select></label><nav class="contents" aria-label="Guide chapters"><div class="eyebrow">Contents</div>${book.chapters.map((ch,i)=>`<button class="chapter-nav ${i===state.reading?'active':''}" data-chapter="${i}" ${i===state.reading?'aria-current="step"':''}><span class="chapter-no ${state.completed.includes(ch.id)?'complete':''}">${state.completed.includes(ch.id)?icon('check'):String(i+1).padStart(2,'0')}</span>${esc(ch.title)}</button>`).join('')}<button class="chapter-nav" data-action="view-sources">${icon('file')} Sources</button><div class="reader-progress">${state.completed.length} of ${book.chapters.length} chapters finished<div class="progress-track" role="progressbar" aria-label="Guide progress" aria-valuenow="${state.completed.length}" aria-valuemin="0" aria-valuemax="${book.chapters.length}"><span style="width:${state.completed.length/book.chapters.length*100}%"></span></div></div></nav>
-    <article class="article"><header class="article-header"><div class="article-title-row"><span class="article-folio" aria-hidden="true">${String(state.reading+1).padStart(2,'0')}</span><div><div class="eyebrow">${esc(c.label)}<span>${c.minutes} min read</span></div><h2>${esc(c.title)}</h2></div></div><p>${esc(c.intro)}</p></header><div class="article-body">${c.sections.map(section=>`<section class="article-section"><h3>${esc(section.title)}</h3><p>${prose(section.text)}</p></section>`).join('')}${c.example?`<aside class="example-box"><div class="eyebrow">${esc(c.example.label)}</div><p>${esc(c.example.text)}</p></aside>`:''}
-    ${c.copyBlocks?`<section class="copy-templates"><h3>Phone mein save karne wale templates</h3><p class="reading-note">${esc(c.copyNote)}</p>${c.copyBlocks.map(block=>`<div class="copy-template"><div class="section-heading"><h4>${esc(block.label)}</h4><button class="btn secondary small" data-copy-block="${esc(block.id)}">Copy template ${icon('file')}</button></div><p>${esc(block.text)}</p></div>`).join('')}</section>`:''}
+    <article class="article"><header class="article-header" data-guide-content><div class="article-title-row"><span class="article-folio" aria-hidden="true">${String(state.reading+1).padStart(2,'0')}</span><div><div class="eyebrow">${esc(c.label)}<span>${esc(ui(`${c.minutes} min read`))}</span></div><h2>${esc(c.title)}</h2></div></div><p>${esc(c.intro)}</p></header><div class="article-body">${c.sections.map(section=>`<section class="article-section" data-guide-content><h3>${esc(section.title)}</h3><p>${prose(section.text)}</p></section>`).join('')}${c.example?`<aside class="example-box" data-guide-content><div class="eyebrow">${esc(c.example.label)}</div><p>${esc(c.example.text)}</p></aside>`:''}
+    ${c.copyBlocks?`<section class="copy-templates"><h3>Templates to save on your phone</h3><p class="reading-note" data-guide-content>${esc(c.copyNote)}</p>${c.copyBlocks.map(block=>`<div class="copy-template"><div class="section-heading"><h4 data-guide-content>${esc(block.label)}</h4><button class="btn secondary small" data-copy-block="${esc(block.id)}">Copy template ${icon('file')}</button></div><p data-guide-content>${esc(block.text)}</p></div>`).join('')}</section>`:''}
     ${files.length?`<section class="chapter-downloads"><h3>Files for this chapter</h3>${files.map(file=>`<a class="chapter-download" href="${esc(file.path)}" download><span>${icon('file')}<span><strong>${esc(file.title)}</strong><small>${esc(file.description)}</small></span></span><span class="download-meta">${esc(file.format)} ${icon('download')}</span></a>`).join('')}</section>`:''}
-    <section class="chapter-checklist"><div class="section-heading"><h3>Things to do</h3><span class="check-count">${checked} of ${c.checklist.length} checked</span></div><ul>${c.checklist.map((text,i)=>{const key=`${c.id}:${i}`;return `<li><input type="checkbox" id="check-${c.id}-${i}" data-chapter-check="${key}" ${state.chapterChecks.includes(key)?'checked':''}><label for="check-${c.id}-${i}">${esc(text)}</label></li>`;}).join('')}</ul><p class="reading-note">Your checks are saved in this browser.</p></section>${state.reading===book.chapters.length-1?`<div class="source-list">${sourcesHTML()}</div>`:''}</div><div class="reader-controls"><button class="btn secondary" data-chapter="${state.reading-1}" ${state.reading===0?'disabled':''}>${icon('arrow','arrow-back')} Previous</button><div class="button-row">${done?`<button class="icon-button" data-action="uncomplete" aria-label="Mark chapter unfinished" title="Mark unfinished">${icon('check')}</button>`:''}<button class="btn" data-action="complete-chapter">${done ? state.reading===book.chapters.length-1?'Back to overview':'Next chapter' : state.reading===book.chapters.length-1?'Finish guide':'Finish chapter & continue'} ${icon('arrow')}</button></div></div></article></div>`;
+    <section class="chapter-checklist"><div class="section-heading"><h3>Things to do</h3><span class="check-count">${checked} of ${c.checklist.length} checked</span></div><ul>${c.checklist.map((text,i)=>{const key=`${c.id}:${i}`;return `<li><input type="checkbox" id="check-${c.id}-${i}" data-chapter-check="${key}" ${state.chapterChecks.includes(key)?'checked':''}><label data-guide-content for="check-${c.id}-${i}">${esc(text)}</label></li>`;}).join('')}</ul><p class="reading-note">Your checks are saved in this browser.</p></section>${state.reading===book.chapters.length-1?`<div class="source-list">${sourcesHTML()}</div>`:''}</div><div class="reader-controls"><button class="btn secondary" data-chapter="${state.reading-1}" ${state.reading===0?'disabled':''}>${icon('arrow','arrow-back')} Previous</button><div class="button-row">${done?`<button class="icon-button" data-action="uncomplete" aria-label="Mark chapter unfinished" title="Mark unfinished">${icon('check')}</button>`:''}<button class="btn" data-action="complete-chapter">${done ? state.reading===book.chapters.length-1?'Back to overview':'Next chapter' : state.reading===book.chapters.length-1?'Finish guide':'Finish chapter & continue'} ${icon('arrow')}</button></div></div></article></div>`;
 }
 function sourcesHTML(includeTitle = true) {
-  return `${includeTitle?'<h3>Sources</h3>':''}<p>These pages were checked on 15 November 2026. Job sites can change their filters. Follow the instructions in the listing you are applying to. The study routine and application targets in this guide are suggestions you can adjust.</p>${book.sources.map(source=>`<div class="source-item" id="source-${source.id}"><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">[${source.id.slice(1)}] ${esc(source.title)} ${icon('up')}</a><p>${esc(source.note)}</p></div>`).join('')}`;
+  return `${includeTitle?'<h3>Sources</h3>':''}<p>These pages were checked on 15 November 2026. Job sites can change their filters. Follow the instructions in the listing you are applying to. The study routine and application targets in this guide are suggestions you can adjust.</p>${book.sources.map(source=>`<div class="source-item" id="source-${source.id}"><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">[${source.id.slice(1)}] ${esc(source.title)} ${icon('up')}</a><p data-guide-content>${esc(source.note)}</p></div>`).join('')}`;
 }
 function searchGuide(query) {
   if(!query) { focusSearch(); return; }
@@ -104,16 +142,17 @@ function applications() {
   return `${heading('Your job search', 'Application tracker.', 'Record the roles you apply for and when you want to follow up.', `<div class="button-row"><button class="btn" data-action="add-job">${icon('plus')} Add application</button></div>`)}
     <div class="summary-row tracker-summary">${stat(apps.length, 'roles', 'Roles you are tracking', 'case', 'applications')}${stat(apps.filter(a=>a.status==='Interview').length, 'interviews', 'Currently interviewing', 'calendar', 'applications')}${stat(apps.filter(a=>a.status==='Offer').length, 'offers', 'Offers received', 'leaf', 'applications')}</div>
     <div class="tracker-toolbar"><p>${apps.length?'Keep notes on your resume version and next step.':'Add a role when you find one you want to apply for.'}</p><button class="btn secondary small" data-action="export-jobs" ${apps.length?'':'disabled'}>${icon('download')} Export CSV</button></div>
-    ${apps.length?`<div class="table-wrap"><table><thead><tr><th>Role / company</th><th>Added</th><th>Status</th><th>Follow up</th><th>Next step / resume</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody>${apps.map(a=>`<tr><td>${safeURL(a.url)?`<a href="${esc(safeURL(a.url))}" target="_blank" rel="noopener noreferrer">${esc(a.role)} ${icon('up')}</a>`:esc(a.role)}<small>${esc(a.company)}</small></td><td>${dateText(a.date)}</td><td><select aria-label="Status for ${esc(a.role)} at ${esc(a.company)}" data-status="${esc(a.id)}">${['Saved','Applied','Interview','Offer','Closed'].map(s=>`<option ${a.status===s?'selected':''}>${s}</option>`).join('')}</select></td><td>${dateText(a.followup)}</td><td style="white-space:normal;min-width:150px;max-width:240px">${esc(a.notes||'—')}</td><td><button class="icon-button" data-edit-job="${esc(a.id)}" aria-label="Edit ${esc(a.role)}">${icon('file')}</button><button class="icon-button danger" data-remove-job="${esc(a.id)}" aria-label="Remove ${esc(a.role)}">${icon('trash')}</button></td></tr>`).join('')}</tbody></table></div>`:`<div class="empty-state">${icon('case')}<h3>No applications yet.</h3><p>Save an opening here, then update its status as you hear back.</p><button class="btn" data-action="add-job">Add an application ${icon('arrow')}</button></div>`}
+    ${apps.length?`<div class="table-wrap"><table><thead><tr><th>Role / company</th><th>Added</th><th>Status</th><th>Follow up</th><th>Next step / resume</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody>${apps.map(a=>`<tr><td data-user-content>${safeURL(a.url)?`<a href="${esc(safeURL(a.url))}" target="_blank" rel="noopener noreferrer">${esc(a.role)} ${icon('up')}</a>`:esc(a.role)}<small>${esc(a.company)}</small></td><td>${dateText(a.date)}</td><td><select data-user-content aria-label="${esc(ui(`Status for ${a.role} at ${a.company}`))}" data-status="${esc(a.id)}">${['Saved','Applied','Interview','Offer','Closed'].map(s=>`<option value="${s}" ${a.status===s?'selected':''}>${esc(ui(s))}</option>`).join('')}</select></td><td>${dateText(a.followup)}</td><td data-user-content style="white-space:normal;min-width:150px;max-width:240px">${esc(a.notes||'—')}</td><td><button class="icon-button" data-edit-job="${esc(a.id)}" data-user-content aria-label="${esc(ui('Edit ') + a.role)}">${icon('file')}</button><button class="icon-button danger" data-remove-job="${esc(a.id)}" data-user-content aria-label="${esc(ui('Remove ') + a.role)}">${icon('trash')}</button></td></tr>`).join('')}</tbody></table></div>`:`<div class="empty-state">${icon('case')}<h3>No applications yet.</h3><p>Save an opening here, then update its status as you hear back.</p><button class="btn" data-action="add-job">Add an application ${icon('arrow')}</button></div>`}
     <p class="storage-note">Adding a role here does not apply for the job. Your records stay in this browser; export a copy if you want a backup.</p>`;
 }
 function render(focus = false) {
   if (!book) return;
   const current = route();
-  document.title = `${routes[current]} · Fieldwork`;
-  $('#breadcrumb').textContent = routes[current];
+  document.title = `${ui(routes[current])} · Fieldwork`;
+  $('#breadcrumb').textContent = ui(routes[current]);
   document.querySelectorAll('[data-nav]').forEach(el=>{el.classList.toggle('active',el.dataset.nav===current); if(el.dataset.nav===current)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');});
   $('#main').innerHTML = ({ overview, booklet: reader, planner, applications })[current]();
+  localizeUI(document.body);
   if (focus) { $('#main').focus({preventScroll:true}); window.scrollTo({top:0,behavior:'instant'}); }
 }
 function showChapter(index) {
@@ -126,12 +165,13 @@ function showChapter(index) {
 function openModal(title, body) {
   const modal = $('#modal');
   modal.innerHTML = `<div class="modal-header"><h2 id="modal-title">${title}</h2><button class="icon-button" data-action="close-modal" aria-label="Close dialog">${icon('close')}</button></div>${body}`;
+  localizeUI(modal);
   modal.showModal();
 }
 
 function jobModal(id) {
   const a = state.applications.find(a=>a.id===id) || {};
-  openModal(id?'Edit application':'Add application', `<p class="modal-desc">Add the role and any details you want to keep.</p><form id="job-form" data-id="${esc(id || '')}"><label class="form-field">Job title<input class="input" name="role" value="${esc(a.role || '')}" placeholder="e.g. Software Engineer" required maxlength="100"></label><label class="form-field">Company<input class="input" name="company" value="${esc(a.company || '')}" placeholder="Company name" required maxlength="100"></label><label class="form-field">Job posting URL <small>Optional · an http or https link</small><input class="input" name="url" type="url" value="${esc(a.url || '')}" placeholder="https://…" maxlength="2000"></label><div class="form-row"><label class="form-field">Status<select class="input" name="status">${['Saved','Applied','Interview','Offer','Closed'].map(s=>`<option ${(a.status||'Saved')===s?'selected':''}>${s}</option>`).join('')}</select></label><label class="form-field">Follow-up date<input class="input" name="followup" type="date" value="${esc(a.followup || '')}"></label></div><label class="form-field">Notes / resume version<textarea class="input" name="notes" rows="2" maxlength="500" placeholder="Resume version, contact details, or the next step">${esc(a.notes || '')}</textarea></label><p class="form-error" id="job-error" role="alert"></p><div class="form-actions"><button class="btn secondary" type="button" data-action="close-modal">Cancel</button><button class="btn" type="submit">Save application ${icon('arrow')}</button></div></form>`);
+  openModal(id?'Edit application':'Add application', `<p class="modal-desc">Add the role and any details you want to keep.</p><form id="job-form" data-id="${esc(id || '')}"><label class="form-field">Job title<input class="input" name="role" value="${esc(a.role || '')}" placeholder="e.g. Software Engineer" required maxlength="100"></label><label class="form-field">Company<input class="input" name="company" value="${esc(a.company || '')}" placeholder="Company name" required maxlength="100"></label><label class="form-field">Job posting URL <small>Optional · an http or https link</small><input class="input" name="url" type="url" value="${esc(a.url || '')}" placeholder="https://…" maxlength="2000"></label><div class="form-row"><label class="form-field">Status<select class="input" name="status">${['Saved','Applied','Interview','Offer','Closed'].map(s=>`<option value="${s}" ${(a.status||'Saved')===s?'selected':''}>${esc(ui(s))}</option>`).join('')}</select></label><label class="form-field">Follow-up date<input class="input" name="followup" type="date" value="${esc(a.followup || '')}"></label></div><label class="form-field">Notes / resume version<textarea class="input" name="notes" rows="2" maxlength="500" placeholder="Resume version, contact details, or the next step">${esc(a.notes || '')}</textarea></label><p class="form-error" id="job-error" role="alert"></p><div class="form-actions"><button class="btn secondary" type="button" data-action="close-modal">Cancel</button><button class="btn" type="submit">Save application ${icon('arrow')}</button></div></form>`);
 }
 
 
@@ -144,8 +184,8 @@ function download(blob,name) {
 function saveJob(form) {
   const d = new FormData(form), id = form.dataset.id, existing = state.applications.find(a=>a.id===id);
   const role = d.get('role').trim(), company = d.get('company').trim(), url = d.get('url').trim();
-  if (!role || !company) { $('#job-error').textContent='Add both the job title and company.'; return; }
-  if (url && !safeURL(url)) { $('#job-error').textContent='Use a complete http or https job posting URL.'; return; }
+  if (!role || !company) { $('#job-error').textContent=ui('Add both the job title and company.'); return; }
+  if (url && !safeURL(url)) { $('#job-error').textContent=ui('Use a complete http or https job posting URL.'); return; }
   const job = {id:existing?.id || uid(),date:existing?.date || todayKey(),role,company,url,status:d.get('status'),followup:d.get('followup'),notes:d.get('notes').trim()};
   if(existing)state.applications=state.applications.map(a=>a.id===id?job:a);else state.applications.unshift(job);
   persist(); $('#modal').close(); render(); notify(existing?'Application updated.':'Application saved.');
@@ -157,7 +197,7 @@ function tick() {
   if (timer.end && timerRemaining()===0) {
     clearInterval(timer.interval);timer.end=null;timer.remaining=0;persist();
     notify('Focus session complete. Take a break when you are ready.');
-    if(route()==='planner'){render();$('#timer-status').textContent='Session complete. Take a break, then reset when you are ready.';}
+    if(route()==='planner'){render();$('#timer-status').textContent=ui('Session complete. Take a break, then reset when you are ready.');}
   }
 }
 function toggleTimer() {
@@ -232,9 +272,10 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden && timer.e
 
 async function init(){
   try {
-    const responses=await Promise.all([fetch('resources/booklet.json'),fetch('resources/manifest.json')]);
+    const responses=await Promise.all([fetch('resources/booklet.json'),fetch('resources/manifest.json'),fetch('resources/languages.json')]);
     if(responses.some(response=>!response.ok))throw new Error('Guide files could not be loaded');
-    [book,resources]=await Promise.all(responses.map(response=>response.json()));
+    [originalBook,resources,languages]=await Promise.all(responses.map(response=>response.json()));
+    selectBookLanguage();
     state.reading=Math.min(state.reading,book.chapters.length-1);
     chapterFromHash();
     state.completed=state.completed.filter(id=>book.chapters.some(chapter=>chapter.id===id));
@@ -244,6 +285,7 @@ async function init(){
     if(timer.end){tick();if(timer.end)timer.interval=setInterval(tick,1000);}
   } catch(error) {
     $('#main').innerHTML=`<div class="empty-state">${icon('book')}<h3>The guide could not be loaded</h3><p>To preview the files locally, run <code>npm start</code> in the project folder and open <code>http://localhost:4173</code>.</p><a class="btn secondary" href="resources/files/job-ready-playbook.pdf">Open the PDF ${icon('arrow')}</a></div>`;
+    localizeUI(document.body);
     console.error('Could not load the guide:',error);
   }
 }

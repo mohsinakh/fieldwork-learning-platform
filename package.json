@@ -1,11 +1,11 @@
 {
   "name": "fieldwork-learning-platform",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "private": true,
   "description": "A frontend-only learning workspace and job preparation playbook.",
   "scripts": {
     "start": "node scripts/serve.mjs",
-    "check": "node --check app.js && node scripts/check.mjs",
+    "check": "node --check app.js && node --check localization.js && node scripts/check.mjs",
     "booklet": "python3 scripts/build_booklet.py"
   }
 }
