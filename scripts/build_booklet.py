@@ -92,7 +92,7 @@ def build(output, total_pages=0, known_pages=None):
     c.setTitle(DATA['title'])
     c.setAuthor('Fieldwork')
     c.setSubject('A practical, general job preparation booklet for freshers and professionals')
-    
+
     # Swiss cover: one accent, sans typography, visible rules, and chapter numerals.
     c.setFillColor(ACCENT)
     c.rect(0,0,W,H,fill=1,stroke=0)
@@ -116,7 +116,7 @@ def build(output, total_pages=0, known_pages=None):
     c.setFont('Helvetica',8);c.drawString(M,55,'November 2026 edition')
     c.drawRightString(W-M,55,'Resume / Job search / Interviews')
     c.showPage()
-    
+
     # Contents and a short reading note.
     base(2,'Contents')
     label(str(len(DATA['chapters']))+' CHAPTERS',M,H-91)
@@ -134,7 +134,7 @@ def build(output, total_pages=0, known_pages=None):
     y=paragraph('Write about work you have done. Describe unfinished work as ongoing, and only use numbers you can explain. Replace the bracketed examples with your own details.',M,y,W-2*M,'body')
     paragraph('The resume checklist, project template, and message examples are in the relevant chapters of the website. Sources are at the end of the guide.',M,y-19,W-2*M,'small')
     c.showPage()
-    
+
     for i,ch in enumerate(DATA['chapters']):
         actual_pages[ch['id']]=c.getPageNumber()
         base(c.getPageNumber(),ch['label']);c.bookmarkPage(f'chapter-{i}');c.addOutlineEntry(clean(ch['title']),f'chapter-{i}',0)
@@ -181,7 +181,7 @@ def build(output, total_pages=0, known_pages=None):
         if y<65:
             raise RuntimeError(f'Chapter {i+1} exceeds its page: bottom at {y:.1f} pt')
         c.showPage()
-    
+
     base(c.getPageNumber(),'Sources & reading notes')
     label('SOURCES & READING NOTES',M,H-91)
     fitted_title('Sources',H-133,32)
