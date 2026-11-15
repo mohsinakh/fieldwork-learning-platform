@@ -34,6 +34,7 @@ The chapter IDs are:
 - `outreach`
 - `routine`
 - `review`
+- `fresher-actions`
 
 ## Change the guide
 

@@ -18,7 +18,8 @@
     "format": "MD",
     "path": "resources/files/project-case-study.md",
     "chapters": [
-      "projects"
+      "projects",
+      "fresher-actions"
     ]
   },
   {
@@ -28,7 +29,18 @@
     "format": "MD",
     "path": "resources/files/outreach-templates.md",
     "chapters": [
-      "outreach"
+      "outreach",
+      "fresher-actions"
+    ]
+  },
+  {
+    "id": "application-kit",
+    "title": "Phone clipboard application kit",
+    "description": "Fill in your own links and introduction, then save them on your phone.",
+    "format": "MD",
+    "path": "resources/files/phone-application-kit.md",
+    "chapters": [
+      "fresher-actions"
     ]
   }
 ]

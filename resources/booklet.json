@@ -286,6 +286,67 @@
         "Ask for feedback on a specific application or interview",
         "Choose one thing to change next week"
       ]
+    },
+    {
+      "id": "fresher-actions",
+      "title": "Fresher ho? Yeh kaam karo.",
+      "label": "Seedha action plan",
+      "minutes": 6,
+      "intro": "Experience nahi hai to isi order mein kaam karo. Resume tayyar karne ke saath relevant jobs par apply bhi karte raho. Neeche har kaam ko poora karke check lagao.",
+      "sections": [
+        {
+          "title": "1. Internship nahi hai? Asli kaam dhoondo.",
+          "text": "Company ki careers page aur job portals par internship openings dekho. Team, mentor, actual tasks aur duration check karo. Teen mahine ka internship sach mein kiya hai tabhi teen mahine likho. Abhi nahi mila to self-projects, volunteer work ya open-source contribution ko unke sahi naam se dikhao. Fake internship, banaya hua certificate, ya kisi aur company ke naam par experience mat likho."
+        },
+        {
+          "title": "2. Do ya teen projects banao aur samjho.",
+          "text": "Jis role aur stack par job chahiye, usi ke projects banao. AI se madad lo, lekin code chalao aur khud badal kar dekho. GitHub par setup steps, demo aur README daalo; phir working link resume mein lagao. Architecture, main topics, tests aur common interview questions ki study list banao. Project banne aur samajh aane ke baad hi use resume par completed work likho."
+        },
+        {
+          "title": "3. Stack clear nahi hai to sawaal poochho.",
+          "text": "Kuch relevant job descriptions dekho. Phir mentor ya apne study group mein poochho: mera current level yeh hai, in roles ke liye kaunsa stack aur project theek rahega? Group mein poochhne se doosre learners bhi jawab dekh sakte hain. Roz padhne aur project samajhne ka time rakho. Interview aane tak basic understanding ko mat taalo."
+        },
+        {
+          "title": "4. Naukri profile poori karo.",
+          "text": "Naukri par skills, projects, education, availability aur job preferences sahi bharo. LinkedIn, GitHub aur resume par dates aur work details ek jaise rakho. Roz relevant openings check karo. Sirf About mein ek-do words badalne ko hiring trick mat samjho; jab koi naya skill, project ya detail ho, tab update karo. [S3]"
+        },
+        {
+          "title": "5. Free time mein relevant jobs par apply karo.",
+          "text": "Phone par reels kholne se pehle saved jobs dekho. Description padho, apni skills se fit check karo aur sahi resume bhejo. Recent-posting filter se nayi openings dekho, lekin isse reply ya kam applicants ki guarantee nahi milti. Listing mein recruiting email ya phone diya ho to job link ke saath save karo; contact instructions follow karke hi email ya call karo. Application aur follow-up date tracker mein likho. [S2]"
+        },
+        {
+          "title": "6. Links aur intro phone mein ready rakho.",
+          "text": "Apna LinkedIn link, GitHub link aur short professional intro ek baar sahi likh lo. Keyboard clipboard mein Pin ka option ho to inhe alag-alag pin karo. Gboard mein copied text ko touch-and-hold karke Pin kiya ja sakta hai. Pin ka option na ho to Notes ya text replacement mein save karo. Har application mein sahi field mein paste karke ek baar check karo. Yeh repeated typing bachata hai; description padhna aur resume choose karna phir bhi zaroori hai. [S5]"
+        }
+      ],
+      "copyNote": "Neeche se apne level ka template lo. Har bracket apni details se bharo. Employer, skills, CGPA aur awards wahi likho jo tumhare hain. Final version aur apne links phone mein save kar lo.",
+      "copyBlocks": [
+        {
+          "id": "fresher-intro",
+          "label": "Fresher intro template",
+          "text": "[Your degree or current course] graduate/student applying for [target role]. Built [project] using [tools] to solve [problem]; responsible for [what you implemented]. Comfortable with [skills you can demonstrate]. Education: [degree]; [CGPA or verified award, if relevant]. LinkedIn: [your LinkedIn URL]. GitHub: [your GitHub URL]."
+        },
+        {
+          "id": "experienced-intro",
+          "label": "Experienced intro template",
+          "text": "[Your specialisation] engineer, currently [actual role] at [actual employer], working on [systems or product]. My contribution includes [specific work], using [tools you use]. Earlier work at [previous employer or project] covered [relevant responsibilities]. Education: [degree]; [CGPA and verified award, if relevant]. LinkedIn: [your LinkedIn URL]. GitHub: [your GitHub URL]."
+        },
+        {
+          "id": "profile-links",
+          "label": "Links to save separately",
+          "text": "LinkedIn: [your LinkedIn URL]\nGitHub: [your GitHub URL]"
+        }
+      ],
+      "checklist": [
+        "Asli internship openings shortlist ki, ya self-directed work ka plan banaya",
+        "Role ke hisaab se do ya teen projects choose kiye",
+        "Projects chala kar samjhe aur GitHub links check kiye",
+        "Architecture aur interview topics ki study list banayi",
+        "Naukri profile aur job preferences poori ki",
+        "LinkedIn aur GitHub links phone mein save kiye",
+        "Apni details wala short intro save kiya",
+        "Relevant applications aur follow-up dates tracker mein likhi"
+      ]
     }
   ],
   "sources": [
@@ -312,6 +373,12 @@
       "title": "FTC - Job Scams",
       "url": "https://consumer.ftc.gov/articles/job-scams",
       "note": "How to check job offers and recognise requests for money. See chapter 10."
+    },
+    {
+      "id": "S5",
+      "title": "Gboard Help - Copy and paste sections of text",
+      "url": "https://support.google.com/gboard/answer/10742542?hl=en-GB",
+      "note": "Saving and pinning copied text in Gboard. See the fresher action chapter. Other keyboards can work differently."
     }
   ]
 }

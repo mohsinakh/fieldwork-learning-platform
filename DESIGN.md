@@ -6,7 +6,7 @@ The interface uses the Swiss anchor from the user-selected [frontend-design skil
 
 The home page has one guide and today's study tasks. Files appear in the relevant guide chapters. There is no separate library or catalog of guides that have not been added.
 
-Large chapter numbers connect the overview and reader. Desktop readers get a sticky contents list; smaller screens use a chapter selector. The study plan and application tracker use the same grid and form styles.
+Large chapter numbers connect the overview and reader. Counts come from the guide data. Desktop readers get a sticky contents list; smaller screens use a chapter selector. The study plan and application tracker use the same grid and form styles.
 
 ## Tokens
 

@@ -18,7 +18,7 @@ try {
     for (const key of ['saved', 'completed', 'chapterChecks']) if (Array.isArray(stored[key])) state[key] = stored[key].filter(v => typeof v === 'string');
     for (const key of ['customTasks', 'applications']) if (Array.isArray(stored[key])) state[key] = stored[key].filter(v => v && typeof v.id === 'string');
     if (stored.focusTimer && typeof stored.focusTimer === 'object') state.focusTimer = stored.focusTimer;
-    if (Number.isInteger(stored.reading)) state.reading = Math.max(0, Math.min(9, stored.reading));
+    if (Number.isInteger(stored.reading)) state.reading = Math.max(0, stored.reading);
     if (stored.days && typeof stored.days === 'object' && !Array.isArray(stored.days)) state.days = stored.days;
   }
 } catch { /* The platform also works for the current session without browser storage. */ }
@@ -35,7 +35,7 @@ function dateText(value) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value || '')) return '—';
   return new Date(`${value}T12:00:00`).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
 }
-function route() { return location.hash === '#resources' ? 'booklet' : Object.hasOwn(routes, location.hash.slice(1)) ? location.hash.slice(1) : 'overview'; }
+function route() { const path=location.hash.slice(1).split('/')[0];return path==='resources'?'booklet':Object.hasOwn(routes,path)?path:'overview'; }
 function notify(message) {
   const el = $('#toast'); el.textContent = message; el.classList.add('visible');
   clearTimeout(toastTimeout); toastTimeout = setTimeout(() => el.classList.remove('visible'), 3500);
@@ -55,7 +55,7 @@ function heading(eyebrow, title, subtitle, aside = '') {
   return `<div class="page-heading"><div><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(title)}</h1><p>${esc(subtitle)}</p></div>${aside}</div>`;
 }
 function bookArt() {
-  return `<div class="chapter-cover" aria-hidden="true"><div class="cover-top"><span>Career preparation</span><span>2026</span></div><div class="cover-number">10<span>chapters</span></div><div class="cover-index">${book.chapters.map((c,i)=>`<span class="${state.completed.includes(c.id)?'complete':''}">${String(i+1).padStart(2,'0')}</span>`).join('')}</div><div class="cover-bottom"><span>${book.chapters.reduce((s,c)=>s+c.minutes,0)} min read</span><span>${state.completed.length} / 10 complete</span></div></div>`;
+  return `<div class="chapter-cover" aria-hidden="true"><div class="cover-top"><span>Career preparation</span><span>2026</span></div><div class="cover-number">${book.chapters.length}<span>chapters</span></div><div class="cover-index" style="--chapter-count:${book.chapters.length}">${book.chapters.map((c,i)=>`<span class="${state.completed.includes(c.id)?'complete':''}">${String(i+1).padStart(2,'0')}</span>`).join('')}</div><div class="cover-bottom"><span>${book.chapters.reduce((s,c)=>s+c.minutes,0)} min read</span><span>${state.completed.length} / ${book.chapters.length} complete</span></div></div>`;
 }
 function taskList(date = selectedDate, limit = Infinity) {
   return tasksFor(date).slice(0, limit).map(t => {
@@ -67,20 +67,21 @@ function taskList(date = selectedDate, limit = Infinity) {
 function overview() {
   const started = state.completed.length > 0 || state.reading > 0;
   return `${heading('Fieldwork', 'Your guides.', 'Open the job preparation guide or work through today’s study tasks.', `<div class="date-label">${esc(dateLabel())}</div>`)}
-    <section class="hero" aria-labelledby="hero-title"><div class="hero-copy"><span class="tag">For freshers and experienced applicants</span><h2 id="hero-title"><span>The job-ready</span><span>playbook.</span></h2><p>Help with your resume, job search, and interviews.<br class="desktop-break"> Templates are included in the chapters.</p><div class="button-row"><a href="#booklet" class="btn">${started ? 'Continue reading' : 'Open guide'} ${icon('arrow')}</a><a href="resources/files/job-ready-playbook.pdf" class="btn secondary" download>${icon('download')} Download PDF</a></div><div class="hero-meta"><span>10 chapters</span><span>${book.chapters.reduce((sum,c)=>sum+c.minutes,0)} min read</span></div></div>${bookArt()}</section>
-    <div class="summary-row">${stat(state.completed.length, '/ 10', 'Chapters finished', 'book', 'booklet')}${stat(completedToday(), `/ ${tasksFor(todayKey()).length}`, 'Today’s tasks checked', 'check', 'planner')}${stat(state.applications.length, 'roles', 'Applications tracked', 'case', 'applications')}</div>
+    <section class="hero" aria-labelledby="hero-title"><div class="hero-copy"><span class="tag">For freshers and experienced applicants</span><h2 id="hero-title"><span>The job-ready</span><span>playbook.</span></h2><p>Help with your resume, job search, and interviews.<br class="desktop-break"> Templates are included in the chapters.</p><div class="button-row"><a href="#booklet" class="btn">${started ? 'Continue reading' : 'Open guide'} ${icon('arrow')}</a><a href="resources/files/job-ready-playbook.pdf" class="btn secondary" download>${icon('download')} Download PDF</a></div><div class="hero-meta"><span>${book.chapters.length} chapters</span><span>${book.chapters.reduce((sum,c)=>sum+c.minutes,0)} min read</span></div><button class="text-link fresher-shortcut" data-chapter="${book.chapters.findIndex(chapter=>chapter.id==='fresher-actions')}">Fresher action checklist ${icon('arrow')}</button></div>${bookArt()}</section>
+    <div class="summary-row">${stat(state.completed.length, `/ ${book.chapters.length}`,  'Chapters finished', 'book', 'booklet')}${stat(completedToday(), `/ ${tasksFor(todayKey()).length}`, 'Today’s tasks checked', 'check', 'planner')}${stat(state.applications.length, 'roles', 'Applications tracked', 'case', 'applications')}</div>
     <section class="home-study"><div class="section-heading"><h2>Today’s study tasks</h2><a class="text-link" href="#planner">Open study plan ${icon('arrow')}</a></div><div class="task-panel"><div class="task-panel-header"><span>Daily tasks</span><span>2 hours</span></div>${taskList(todayKey(),3)}</div></section>`;
 }
-function prose(text) { return esc(text).replace(/\[S([1-4])\]/g, (_, n) => `<a href="#source-S${n}" data-source="S${n}" aria-label="Source ${n}">[${n}]</a>`); }
+function prose(text) { return esc(text).replace(/\[S(\d+)\]/g, (_, n) => `<a href="#source-S${n}" data-source="S${n}" aria-label="Source ${n}">[${n}]</a>`); }
 function reader() {
   const c = book.chapters[state.reading], done = state.completed.includes(c.id);
   const files = resources.filter(r => r.chapters.includes(c.id));
   const checked = c.checklist.filter((_,i)=>state.chapterChecks.includes(`${c.id}:${i}`)).length;
   return `${heading('Job preparation guide', book.title + '.', 'Read a chapter, use its checklist, and come back when you need it.', `<div class="button-row"><a class="btn secondary" href="resources/files/job-ready-playbook.pdf" download>${icon('download')} Download PDF</a></div>`)}
-    <div class="reader-layout"><label class="mobile-chapter-picker">Choose a chapter<select id="chapter-picker" aria-label="Choose chapter">${book.chapters.map((ch,i)=>`<option value="${i}" ${i===state.reading?'selected':''}>${String(i+1).padStart(2,'0')}. ${esc(ch.title)}</option>`).join('')}</select></label><nav class="contents" aria-label="Guide chapters"><div class="eyebrow">Contents</div>${book.chapters.map((ch,i)=>`<button class="chapter-nav ${i===state.reading?'active':''}" data-chapter="${i}" ${i===state.reading?'aria-current="step"':''}><span class="chapter-no ${state.completed.includes(ch.id)?'complete':''}">${state.completed.includes(ch.id)?icon('check'):String(i+1).padStart(2,'0')}</span>${esc(ch.title)}</button>`).join('')}<button class="chapter-nav" data-action="view-sources">${icon('file')} Sources</button><div class="reader-progress">${state.completed.length} of 10 chapters finished<div class="progress-track" role="progressbar" aria-label="Guide progress" aria-valuenow="${state.completed.length}" aria-valuemin="0" aria-valuemax="10"><span style="width:${state.completed.length*10}%"></span></div></div></nav>
+    <div class="reader-layout"><label class="mobile-chapter-picker">Choose a chapter<select id="chapter-picker" aria-label="Choose chapter">${book.chapters.map((ch,i)=>`<option value="${i}" ${i===state.reading?'selected':''}>${String(i+1).padStart(2,'0')}. ${esc(ch.title)}</option>`).join('')}</select></label><nav class="contents" aria-label="Guide chapters"><div class="eyebrow">Contents</div>${book.chapters.map((ch,i)=>`<button class="chapter-nav ${i===state.reading?'active':''}" data-chapter="${i}" ${i===state.reading?'aria-current="step"':''}><span class="chapter-no ${state.completed.includes(ch.id)?'complete':''}">${state.completed.includes(ch.id)?icon('check'):String(i+1).padStart(2,'0')}</span>${esc(ch.title)}</button>`).join('')}<button class="chapter-nav" data-action="view-sources">${icon('file')} Sources</button><div class="reader-progress">${state.completed.length} of ${book.chapters.length} chapters finished<div class="progress-track" role="progressbar" aria-label="Guide progress" aria-valuenow="${state.completed.length}" aria-valuemin="0" aria-valuemax="${book.chapters.length}"><span style="width:${state.completed.length/book.chapters.length*100}%"></span></div></div></nav>
     <article class="article"><header class="article-header"><div class="article-title-row"><span class="article-folio" aria-hidden="true">${String(state.reading+1).padStart(2,'0')}</span><div><div class="eyebrow">${esc(c.label)}<span>${c.minutes} min read</span></div><h2>${esc(c.title)}</h2></div></div><p>${esc(c.intro)}</p></header><div class="article-body">${c.sections.map(section=>`<section class="article-section"><h3>${esc(section.title)}</h3><p>${prose(section.text)}</p></section>`).join('')}${c.example?`<aside class="example-box"><div class="eyebrow">${esc(c.example.label)}</div><p>${esc(c.example.text)}</p></aside>`:''}
+    ${c.copyBlocks?`<section class="copy-templates"><h3>Phone mein save karne wale templates</h3><p class="reading-note">${esc(c.copyNote)}</p>${c.copyBlocks.map(block=>`<div class="copy-template"><div class="section-heading"><h4>${esc(block.label)}</h4><button class="btn secondary small" data-copy-block="${esc(block.id)}">Copy template ${icon('file')}</button></div><p>${esc(block.text)}</p></div>`).join('')}</section>`:''}
     ${files.length?`<section class="chapter-downloads"><h3>Files for this chapter</h3>${files.map(file=>`<a class="chapter-download" href="${esc(file.path)}" download><span>${icon('file')}<span><strong>${esc(file.title)}</strong><small>${esc(file.description)}</small></span></span><span class="download-meta">${esc(file.format)} ${icon('download')}</span></a>`).join('')}</section>`:''}
-    <section class="chapter-checklist"><div class="section-heading"><h3>Things to do</h3><span class="check-count">${checked} of ${c.checklist.length} checked</span></div><ul>${c.checklist.map((text,i)=>{const key=`${c.id}:${i}`;return `<li><input type="checkbox" id="check-${c.id}-${i}" data-chapter-check="${key}" ${state.chapterChecks.includes(key)?'checked':''}><label for="check-${c.id}-${i}">${esc(text)}</label></li>`;}).join('')}</ul><p class="reading-note">Your checks are saved in this browser.</p></section>${state.reading===9?`<div class="source-list">${sourcesHTML()}</div>`:''}</div><div class="reader-controls"><button class="btn secondary" data-chapter="${state.reading-1}" ${state.reading===0?'disabled':''}>${icon('arrow','arrow-back')} Previous</button><div class="button-row">${done?`<button class="icon-button" data-action="uncomplete" aria-label="Mark chapter unfinished" title="Mark unfinished">${icon('check')}</button>`:''}<button class="btn" data-action="complete-chapter">${done ? state.reading===9?'Back to overview':'Next chapter' : state.reading===9?'Finish guide':'Finish chapter & continue'} ${icon('arrow')}</button></div></div></article></div>`;
+    <section class="chapter-checklist"><div class="section-heading"><h3>Things to do</h3><span class="check-count">${checked} of ${c.checklist.length} checked</span></div><ul>${c.checklist.map((text,i)=>{const key=`${c.id}:${i}`;return `<li><input type="checkbox" id="check-${c.id}-${i}" data-chapter-check="${key}" ${state.chapterChecks.includes(key)?'checked':''}><label for="check-${c.id}-${i}">${esc(text)}</label></li>`;}).join('')}</ul><p class="reading-note">Your checks are saved in this browser.</p></section>${state.reading===book.chapters.length-1?`<div class="source-list">${sourcesHTML()}</div>`:''}</div><div class="reader-controls"><button class="btn secondary" data-chapter="${state.reading-1}" ${state.reading===0?'disabled':''}>${icon('arrow','arrow-back')} Previous</button><div class="button-row">${done?`<button class="icon-button" data-action="uncomplete" aria-label="Mark chapter unfinished" title="Mark unfinished">${icon('check')}</button>`:''}<button class="btn" data-action="complete-chapter">${done ? state.reading===book.chapters.length-1?'Back to overview':'Next chapter' : state.reading===book.chapters.length-1?'Finish guide':'Finish chapter & continue'} ${icon('arrow')}</button></div></div></article></div>`;
 }
 function sourcesHTML(includeTitle = true) {
   return `${includeTitle?'<h3>Sources</h3>':''}<p>These pages were checked on 15 November 2026. Job sites can change their filters. Follow the instructions in the listing you are applying to. The study routine and application targets in this guide are suggestions you can adjust.</p>${book.sources.map(source=>`<div class="source-item" id="source-${source.id}"><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">[${source.id.slice(1)}] ${esc(source.title)} ${icon('up')}</a><p>${esc(source.note)}</p></div>`).join('')}`;
@@ -88,7 +89,7 @@ function sourcesHTML(includeTitle = true) {
 function searchGuide(query) {
   if(!query) { focusSearch(); return; }
   const needle=query.toLowerCase();
-  const matches=book.chapters.map((chapter,index)=>({chapter,index})).filter(({chapter})=>[chapter.title,chapter.intro,...chapter.sections.flatMap(section=>[section.title,section.text]),...chapter.checklist,chapter.example?.text||''].join(' ').toLowerCase().includes(needle));
+  const matches=book.chapters.map((chapter,index)=>({chapter,index})).filter(({chapter})=>[chapter.title,chapter.intro,...chapter.sections.flatMap(section=>[section.title,section.text]),...chapter.checklist,chapter.example?.text||'',...(chapter.copyBlocks||[]).flatMap(block=>[block.label,block.text])].join(' ').toLowerCase().includes(needle));
   openModal('Search the guide',`<p class="modal-desc">${matches.length} ${matches.length===1?'chapter':'chapters'} found for “${esc(query)}”.</p><div class="guide-search-results">${matches.length?matches.map(({chapter,index})=>`<button data-chapter="${index}"><span>${String(index+1).padStart(2,'0')}</span><span><strong>${esc(chapter.title)}</strong><small>${esc(chapter.intro)}</small></span>${icon('arrow')}</button>`).join(''):'<p>Try a word such as resume, projects, or interviews.</p>'}</div><div class="form-actions"><button class="btn secondary" data-action="close-modal">Close</button></div>`);
 }
 function planner() {
@@ -119,7 +120,8 @@ function showChapter(index) {
   if (!Number.isInteger(index) || index < 0 || index >= book.chapters.length) return;
   if($('#modal').open)$('#modal').close();
   state.reading = index; persist();
-  if (route() !== 'booklet') location.hash = 'booklet'; else render(true);
+  const hash=`#booklet/${book.chapters[index].id}`;
+  if(location.hash!==hash)location.hash=hash;else render(true);
 }
 function openModal(title, body) {
   const modal = $('#modal');
@@ -173,6 +175,7 @@ function exportJobs() {
 document.addEventListener('click',async event=>{
   const el = event.target.closest('button, a'); if(!el)return;
   if(el.classList.contains('skip-link')){event.preventDefault();$('#main').focus();$('#main').scrollIntoView();return;}
+  if(el.dataset.copyBlock){const block=book.chapters[state.reading].copyBlocks?.find(item=>item.id===el.dataset.copyBlock);if(block){try{await navigator.clipboard.writeText(block.text);notify('Template copied. Replace the brackets with your details.');}catch{openModal('Copy template',`<label class="form-field">Select and copy this text<textarea class="input" rows="7" readonly>${esc(block.text)}</textarea></label><div class="form-actions"><button class="btn secondary" data-action="close-modal">Close</button></div>`);}}return;}
   if(el.dataset.chapter!==undefined){showChapter(Number(el.dataset.chapter));return;}
   if(el.dataset.editJob){jobModal(el.dataset.editJob);return;}
   if(el.dataset.removeJob){
@@ -186,7 +189,7 @@ document.addEventListener('click',async event=>{
     case 'close-modal':$('#modal').close();break;
     case 'complete-chapter':{
       const c=book.chapters[state.reading];if(!state.completed.includes(c.id))state.completed.push(c.id);persist();
-      if(state.reading<9)showChapter(state.reading+1);else{location.hash='overview';notify(state.completed.length===10?'You have finished all 10 chapters.':'Chapter marked as finished.');}break;
+      if(state.reading<book.chapters.length-1)showChapter(state.reading+1);else{location.hash='overview';notify(state.completed.length===book.chapters.length?`You have finished all ${book.chapters.length} chapters.`:'Chapter marked as finished.');}break;
     }
     case 'uncomplete':state.completed=state.completed.filter(id=>id!==book.chapters[state.reading].id);persist();render();break;
     case 'view-sources':openModal('Sources',`<div class="source-list">${sourcesHTML(false)}</div><div class="form-actions"><button class="btn" data-action="close-modal">Close</button></div>`);break;
@@ -223,7 +226,8 @@ document.addEventListener('keydown',event=>{
   if(event.key==='/' && !['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName) && !$('#modal').open){event.preventDefault();focusSearch();}
   if(event.key==='Escape'){closeNavigation();}
 });
-window.addEventListener('hashchange',()=>{closeNavigation();$('#global-search').classList.remove('expanded');if($('#modal').open)$('#modal').close();render(true);});
+function chapterFromHash(){if(!book||route()!=='booklet')return;const id=location.hash.slice(1).split('/')[1],index=book.chapters.findIndex(chapter=>chapter.id===id);if(index>=0){state.reading=index;persist();}}
+window.addEventListener('hashchange',()=>{chapterFromHash();closeNavigation();$('#global-search').classList.remove('expanded');if($('#modal').open)$('#modal').close();render(true);});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden && timer.end)tick();});
 
 async function init(){
@@ -231,6 +235,8 @@ async function init(){
     const responses=await Promise.all([fetch('resources/booklet.json'),fetch('resources/manifest.json')]);
     if(responses.some(response=>!response.ok))throw new Error('Guide files could not be loaded');
     [book,resources]=await Promise.all(responses.map(response=>response.json()));
+    state.reading=Math.min(state.reading,book.chapters.length-1);
+    chapterFromHash();
     state.completed=state.completed.filter(id=>book.chapters.some(chapter=>chapter.id===id));
     state.chapterChecks=state.chapterChecks.filter(key=>book.chapters.some(chapter=>chapter.checklist.some((_,i)=>key===`${chapter.id}:${i}`)));
     if(location.hash==='#resources')history.replaceState(null,'','#booklet');
