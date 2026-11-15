@@ -1,0 +1,34 @@
+[
+  {
+    "id": "resume-checklist",
+    "title": "Resume checklist",
+    "description": "Check your resume and application before you send them.",
+    "format": "MD",
+    "path": "resources/files/resume-checklist.md",
+    "chapters": [
+      "fresher",
+      "experience",
+      "apply"
+    ]
+  },
+  {
+    "id": "project-story",
+    "title": "Project write-up template",
+    "description": "Write down what your project does, what you built, and how you tested it.",
+    "format": "MD",
+    "path": "resources/files/project-case-study.md",
+    "chapters": [
+      "projects"
+    ]
+  },
+  {
+    "id": "outreach",
+    "title": "Application and follow-up messages",
+    "description": "Examples for an application email, a referral request, and a follow-up.",
+    "format": "MD",
+    "path": "resources/files/outreach-templates.md",
+    "chapters": [
+      "outreach"
+    ]
+  }
+]

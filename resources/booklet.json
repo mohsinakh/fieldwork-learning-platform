@@ -1,0 +1,317 @@
+{
+  "title": "The job-ready playbook",
+  "subtitle": "Help with your resume, projects, job search, and interviews, whether you are applying for your first role or changing jobs.",
+  "edition": "November 2026",
+  "chapters": [
+    {
+      "id": "direction",
+      "minutes": 3,
+      "title": "Choose the roles you want to apply for",
+      "label": "Choosing a role",
+      "intro": "Start by deciding what kind of work you want. That makes it easier to choose what to study and which experience to put on your resume.",
+      "sections": [
+        {
+          "title": "Read a few job descriptions",
+          "text": "Find five to ten openings that interest you. Compare the responsibilities and the skills that keep coming up. Check the experience level, location, and working arrangements too. Choose one main role and a closely related alternative. Use those titles in your job preferences when they describe the work you can do."
+        },
+        {
+          "title": "Work out what you can already show",
+          "text": "For each common requirement, note a project, work task, or course exercise you could talk about. Put anything you have only watched in a video on your study list. Practise it until you can use it and explain how it works."
+        },
+        {
+          "title": "Set an application target you can manage",
+          "text": "You could start with three relevant applications on a weekday. Adjust that around your studies and other commitments. Give a strong match enough time to read the description and prepare the application, then look at the responses each week."
+        }
+      ],
+      "example": {
+        "label": "Write down your target",
+        "text": "I am looking for [role]. My most relevant work is [project or experience], where I [what you did]."
+      },
+      "checklist": [
+        "Choose a main role and a related alternative",
+        "Read five job descriptions",
+        "Match the common requirements to work you can explain"
+      ]
+    },
+    {
+      "id": "story",
+      "minutes": 4,
+      "title": "Keep your profiles consistent",
+      "label": "Resume and profiles",
+      "intro": "Someone reading your resume, LinkedIn, GitHub, or portfolio should find the same facts about where you worked and what you did.",
+      "sections": [
+        {
+          "title": "Check the details across your profiles",
+          "text": "Compare your dates, job titles, employment types, education, and project names. You can give more detail on one platform than another. If a vendor employed you on a client assignment, name the employer and explain the client work accurately."
+        },
+        {
+          "title": "Make your projects easy to review",
+          "text": "Write a short headline that describes the work you want to do. Pick two or three relevant projects to feature. For each one, explain the problem, the part you built, and a decision you made. Include enough evidence for someone to inspect the work. A repository README should explain how to run it and what its limits are."
+        },
+        {
+          "title": "Use numbers you can explain",
+          "text": "For a result on your resume, know the baseline and how you measured the change. Say whether it came from a local test, a prototype, or production. If you recently joined a team, describe what you are building and what you have finished so far. Add results once you have measured them, and keep confidential employer data out of public profiles."
+        }
+      ],
+      "example": {
+        "label": "A project description you can adapt",
+        "text": "I built [feature] to help with [problem]. I was responsible for [part of the work]. I chose [approach] because [reason], and checked it using [test or evaluation]. It still has [limitation]."
+      },
+      "checklist": [
+        "Check dates and titles across your profiles",
+        "Feature projects that fit the roles you want",
+        "Check how each result was measured"
+      ]
+    },
+    {
+      "id": "fresher",
+      "minutes": 4,
+      "title": "Write a resume for your first job",
+      "label": "For freshers",
+      "intro": "If you have not had a formal job yet, use projects and other work you have done. Give the interviewer something you can show and discuss.",
+      "sections": [
+        {
+          "title": "Put the most useful information first",
+          "text": "Contact details, relevant skills, selected projects, education, and any genuine experience are a useful starting order. Move education higher if it is your strongest qualification. For an early-career resume, try a readable page first and use more space only if the content needs it."
+        },
+        {
+          "title": "Explain your part in a project",
+          "text": "Describe the problem, what you implemented, the tools you used, and how you tested it. In a team project, say which part was yours. Add a repository or demo link where it helps, and open it in a signed-out browser to check that other people can access it."
+        },
+        {
+          "title": "Describe experience honestly",
+          "text": "You can include academic projects, volunteering, freelance work, open-source contributions, and self-directed work. Label each for what it was. A virtual job simulation is different from employment. Only list internships and certificates you completed. Do not invent an employer, a certificate, dates, or results to fill a gap."
+        }
+      ],
+      "example": {
+        "label": "Project bullet",
+        "text": "Implemented [feature] in [project] using [tools]. Checked [behaviour] with [tests or evaluation]. Use details from work you have done."
+      },
+      "checklist": [
+        "Choose projects you can run and explain",
+        "Describe your contribution to team work",
+        "Check every experience and credential you list"
+      ]
+    },
+    {
+      "id": "experience",
+      "minutes": 4,
+      "title": "Describe your work experience clearly",
+      "label": "For experienced applicants",
+      "intro": "A recruiter needs to understand what you were responsible for and what you contributed. Give them more than a list of duties.",
+      "sections": [
+        {
+          "title": "Explain what you did",
+          "text": "Start a bullet with the action you took, explain the part you owned, and include an outcome if you have evidence for it. Make your contribution clear when the result belongs to a team. Give recent work that fits the new role more space."
+        },
+        {
+          "title": "Be specific about ongoing work",
+          "text": "If you recently joined, describe the component you are building and its current stage. A completed design review, implemented validation, or added tests can be worth mentioning when that is what you did. Describe deployment and business results only once they have happened."
+        },
+        {
+          "title": "Keep a record while the work is fresh",
+          "text": "Privately note the problem, your decisions, who you worked with, and results you are allowed to share. Keep technical measurements separate from business outcomes. For claims about latency or quality, record the baseline and relevant details such as the dataset, sample size, and hardware. Follow your employer's confidentiality rules."
+        }
+      ],
+      "example": {
+        "label": "An ongoing-work bullet",
+        "text": "Implementing [component] for [use case]. Completed [milestone] and currently checking [specific behaviour]."
+      },
+      "checklist": [
+        "Replace a vague duty with a specific contribution",
+        "Separate your work from a team-wide result",
+        "Check that ongoing work is described as ongoing"
+      ]
+    },
+    {
+      "id": "projects",
+      "minutes": 4,
+      "title": "Understand the projects on your resume",
+      "label": "Project preparation",
+      "intro": "Choose a project that uses skills your target role needs. Finish a version you can run, then get comfortable explaining and changing it.",
+      "sections": [
+        {
+          "title": "Choose a manageable project",
+          "text": "Decide who it is for, which problem it solves, and what the first version needs to do. Include setup instructions, a short demo, and a README explaining the architecture and known limits. Two finished projects you understand are usually easier to discuss than several unfinished copies."
+        },
+        {
+          "title": "Check the code you get from AI",
+          "text": "AI can help you build, explain unfamiliar code, or suggest tests and alternatives. Review what it produces, check dependencies and licences, and keep secrets out of the repository. Before you put the project on your resume, run it yourself. You should be able to change a feature, debug a failure, and explain the important design choices. Describe your contribution and any assistance accurately."
+        },
+        {
+          "title": "Practise explaining it before you apply",
+          "text": "Give a two-minute walkthrough of the problem and the flow from input to output. Describe your part and one case where the project fails. Prepare to explain why you chose the approach, how you tested it, and what you would change next. Learn the main parts before applying, then revisit the details before an interview."
+        }
+      ],
+      "checklist": [
+        "Run the project from a clean setup",
+        "Write down the architecture and its limits",
+        "Practise explaining a design choice and a failure case"
+      ]
+    },
+    {
+      "id": "search",
+      "minutes": 5,
+      "title": "Find jobs that fit your skills",
+      "label": "Searching for jobs",
+      "intro": "Read the description before applying. Spend your time on roles where you can explain how your skills or experience fit the work.",
+      "sections": [
+        {
+          "title": "Use a focused search",
+          "text": "Search for a role title with a skill you know. Try related titles, then filter for location, work arrangement, and experience. Date-posted filters can help you check recent openings, including the last 24 hours where that option is available. A recent post is worth checking, though it does not guarantee fewer applicants or a reply. [S2]"
+        },
+        {
+          "title": "Complete your Naukri and LinkedIn profiles",
+          "text": "Add accurate skills, experience, availability, and preferred titles and locations. Check recommended jobs and set up relevant alerts or saved searches. Update your profile when something changes. Changing a word every day is not a reliable way to get hired; use that time to review openings and apply to suitable ones. [S3]"
+        },
+        {
+          "title": "Check the company's careers page",
+          "text": "Keep a short list of companies you would like to work for. When possible, confirm an opening on the official careers page and follow its instructions. Check the main responsibilities, mandatory requirements, work eligibility, location, and seniority. You can apply without every preferred skill, but be honest about gaps that affect your ability to do the job. Save the job URL, description, date, and source in case the listing disappears."
+        }
+      ],
+      "checklist": [
+        "Set accurate role and location preferences",
+        "Create an alert for a relevant search",
+        "Save suitable openings with their descriptions"
+      ]
+    },
+    {
+      "id": "apply",
+      "minutes": 5,
+      "title": "Tailor your resume before applying",
+      "label": "Preparing an application",
+      "intro": "Make the experience that matters to this role easy to find. Keep the facts the same as you change the emphasis.",
+      "sections": [
+        {
+          "title": "Match the description to your work",
+          "text": "Read the full description and pick the projects or work examples that show you can handle the main responsibilities. Move relevant bullets higher. Use the employer's terms when they accurately describe skills you have. Keep a master resume and save the version you send for each role. Be ready to explain why the role fits you and which examples support that. [S1]"
+        },
+        {
+          "title": "Check the file you will send",
+          "text": "Use readable text, standard section headings, and a simple layout. Follow the requested file format. Check spelling and links after exporting, and make sure the text can be selected. Copying it into a plain text editor can reveal problems, although it cannot guarantee how every applicant tracking system will read the file."
+        },
+        {
+          "title": "Check the application details",
+          "text": "Confirm the company and title, attach the correct resume, and answer screening questions truthfully. If a cover letter is requested, explain how one or two relevant examples fit the work. Record the date, resume version, and a follow-up reminder. Avoid submitting the same application twice. [S1]"
+        }
+      ],
+      "example": {
+        "label": "An AI prompt for editing your resume",
+        "text": "Compare this job description with my resume. Suggest which existing work to emphasise. Do not invent skills, experience, metrics, employers, or credentials. Point out requirements I have not demonstrated."
+      },
+      "checklist": [
+        "Choose evidence for the main requirements",
+        "Read the exported resume and test its links",
+        "Save the version you submit"
+      ]
+    },
+    {
+      "id": "outreach",
+      "minutes": 4,
+      "title": "Contact recruiters and ask for referrals",
+      "label": "Messages and follow-ups",
+      "intro": "Say which role you are asking about and why it interests you. Keep the request short enough that someone can answer it quickly.",
+      "sections": [
+        {
+          "title": "Use the contact details in the listing",
+          "text": "Use a recruiting email or professional channel published for the role. Include the title and reference number if there is one. Follow any contact instructions, avoid personal numbers, and do not send repeated messages. Share only what the application needs."
+        },
+        {
+          "title": "Give a referral request some context",
+          "text": "Mention the opening and one example of relevant work. Ask whether the person is comfortable reviewing your fit or explaining the referral process. Give them room to decline. A referral still requires you to follow the company's application process."
+        },
+        {
+          "title": "Allow time before following up",
+          "text": "Use the employer's timeline if they give one. Otherwise, roughly seven to ten business days is a reasonable starting point for a polite check-in. Include the role and when you applied, then ask about next steps. Keep applying elsewhere and respect any no-contact instruction."
+        }
+      ],
+      "example": {
+        "label": "Application follow-up",
+        "text": "Hello [name], I applied for [role / reference] on [date]. My work on [example] involved [your contribution], which fits [requirement]. Could you share any update on the next steps? Thank you for your time."
+      },
+      "checklist": [
+        "Check that the contact channel is intended for applicants",
+        "Mention the role and one relevant example",
+        "Set a follow-up date based on the employer's timeline"
+      ]
+    },
+    {
+      "id": "routine",
+      "minutes": 4,
+      "title": "Make time to study while you apply",
+      "label": "Study and interview practice",
+      "intro": "Pick a study window you can keep. Decide what you will work on before you sit down, and put distracting apps away.",
+      "sections": [
+        {
+          "title": "Give each session a clear task",
+          "text": "If you have two hours, try 45 minutes learning a concept, 45 minutes using it, 20 minutes explaining it without notes, and 10 minutes choosing the next task. Take breaks when you need them. Start with a shorter session if two hours does not fit your day, then increase it gradually."
+        },
+        {
+          "title": "Check what you understood",
+          "text": "After a lesson, close it and explain the idea in your own words. Try an exercise or change the example. Note what you could not explain and ask a specific question about it. Watching a course to the end does not tell you whether you can use the material in an interview."
+        },
+        {
+          "title": "Prepare for the interview you have",
+          "text": "Read the job description again, along with the resume you submitted and information about the company's product. Practise the fundamentals and practical tasks relevant to the role. Prepare a project walkthrough, examples of working with other people, and questions for the team. Check your interview setup and ask for any accessibility adjustments you need."
+        }
+      ],
+      "checklist": [
+        "Choose a study time you can keep",
+        "Explain a concept without reading your notes",
+        "Practise a project walkthrough before the interview"
+      ]
+    },
+    {
+      "id": "review",
+      "minutes": 4,
+      "title": "Review your search each week",
+      "label": "Your next two weeks",
+      "intro": "Keep a record of applications and interviews so you can see where to make changes. A week with no replies gives you very little evidence on its own.",
+      "sections": [
+        {
+          "title": "Use the first week to prepare",
+          "text": "Choose your target roles, check your profiles, and prepare your resume. Finish a case study for one project and set up job alerts and an application tracker. Ask someone you trust to review one application against its job description."
+        },
+        {
+          "title": "Apply and review the responses",
+          "text": "In the second week, apply to a manageable number of relevant roles and keep studying. Look at which applications receive replies and how far interviews progress. Avoid drawing firm conclusions from a small sample. If replies stay low, check your targeting and the examples on your resume. If interviews stall, work on the skills or explanations that caused difficulty."
+        },
+        {
+          "title": "Check unfamiliar recruiters and offers",
+          "text": "Verify the recruiter and opening through the company's official channels. Do not pay to obtain a job or to release supposed earnings. Be careful with unexpected requests for bank details, identity documents, or deposits. A professional-looking website does not prove an offer is genuine. [S4]"
+        }
+      ],
+      "checklist": [
+        "Review the applications and responses you have recorded",
+        "Ask for feedback on a specific application or interview",
+        "Choose one thing to change next week"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Harvard MCS - Creating a Strong Resume",
+      "url": "https://careerservices.fas.harvard.edu/resources/create-a-strong-resume/",
+      "note": "Advice on writing resumes and cover letters. See chapters 3, 4, and 7."
+    },
+    {
+      "id": "S2",
+      "title": "LinkedIn Help - Filter and sort job search results",
+      "url": "https://www.linkedin.com/help/linkedin/answer/a511259",
+      "note": "How to filter job searches by date, location, and experience. See chapter 6. Available filters can vary."
+    },
+    {
+      "id": "S3",
+      "title": "Naukri - How Naukri Works",
+      "url": "https://www.naukri.com/blog/how-naukri-works/",
+      "note": "Setting up a profile and searching for jobs. See chapter 6."
+    },
+    {
+      "id": "S4",
+      "title": "FTC - Job Scams",
+      "url": "https://consumer.ftc.gov/articles/job-scams",
+      "note": "How to check job offers and recognise requests for money. See chapter 10."
+    }
+  ]
+}
